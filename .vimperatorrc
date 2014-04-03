@@ -1,0 +1,15 @@
+"3.8.2 (created: 2014/02/13 23:52:43)
+
+
+cmap <C-b> <Left>
+cmap <C-f> <Right>
+cmap <A-b> <C-Left>
+cmap <A-f> <C-Right>
+map , gT
+map . gt
+map e :bdelete!<Space>
+map x :open<Space>d<Space>
+set defsearch=g
+source! ~/.vimperatorrc.local
+
+" vim: set ft=vimperator:
