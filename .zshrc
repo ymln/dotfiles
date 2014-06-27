@@ -88,7 +88,7 @@ MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 # Tell Node about these packages
 NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 
-[[ -s /home/yura/.nvm/nvm.sh ]] && . /home/yura/.nvm/nvm.sh # This loads NVM
+[[ -s ~/.nvm/nvm.sh ]] && . ~/.nvm/nvm.sh # This loads NVM
 
 export PHPBREW_SET_PROMPT=1
 . ~/.phpbrew/bashrc
