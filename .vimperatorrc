@@ -1,12 +1,13 @@
 "3.8.2 (created: 2014/02/13 23:52:43)
 
-
 cmap <C-b> <Left>
 cmap <C-f> <Right>
 cmap <A-b> <C-Left>
 cmap <A-f> <C-Right>
-map , gT
-map . gt
+nmap , gT
+nmap . gt
+nmap J gt
+nmap K gT
 map e :bdelete!<Space>
 map x :open<Space>d<Space>
 set defsearch=g
