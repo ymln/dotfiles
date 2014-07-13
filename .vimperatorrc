@@ -1,14 +1,19 @@
-"3.8.2 (created: 2014/02/13 23:52:43)
-
+"3.8.2 (created: 2014/05/06 14:58:00)
 
 cmap <C-b> <Left>
 cmap <C-f> <Right>
 cmap <A-b> <C-Left>
 cmap <A-f> <C-Right>
+imap <C-b> <Left>
+imap <C-f> <Right>
+imap <A-b> <C-Left>
+imap <A-f> <C-Right>
 map , gT
 map . gt
 map e :bdelete!<Space>
 map x :open<Space>d<Space>
+map <lt> :tabmove!<Space>-1<Return>
+map > :tabmove!<Space>+1<Return>
 set defsearch=g
 source! ~/.vimperatorrc.local
 
