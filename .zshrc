@@ -1,7 +1,7 @@
 ## fasd
 eval "$(fasd --init auto)"
-## Prompt:
-setopt PROMPT_SUBST AUTO_CD
+
+setopt PROMPT_SUBST AUTO_CD HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE EXTENDEDGLOB
 autoload -Uz vcs_info
 
 bindkey -e
@@ -21,6 +21,8 @@ export EDITOR='emacsclient -c -nw'
 export SVN_EDITOR=$EDITOR
 export GIT_EDITOR=$EDITOR
 export SHELL=/bin/zsh
+export HISTSIZE=10000
+export HISTFILE=$HOME/.zhistory
 
 alias g=git
 alias _=sudo
@@ -87,3 +89,6 @@ zstyle :compinstall filename '/home/my/.zshrc'
 
 autoload -Uz compinit
 compinit
+
+bindkey '^R' history-incremental-pattern-search-backward
+bindkey '^S' history-incremental-pattern-search-forward
