@@ -1,5 +1,3 @@
-"3.8.2 (created: 2014/02/13 23:52:43)
-
 cmap <C-b> <Left>
 cmap <C-f> <Right>
 cmap <A-b> <C-Left>
@@ -8,9 +6,13 @@ nmap , gT
 nmap . gt
 nmap J gt
 nmap K gT
+imap <C-b> <Left>
+imap <C-f> <Right>
+imap <A-b> <C-Left>
+imap <A-f> <C-Right>
 map e :bdelete!<Space>
 map x :open<Space>d<Space>
+map <lt> :tabmove!<Space>-1<Return>
+map > :tabmove!<Space>+1<Return>
 set defsearch=g
 source! ~/.vimperatorrc.local
-
-" vim: set ft=vimperator:
