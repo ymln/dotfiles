@@ -39,6 +39,7 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'groenewege/vim-less'
 Bundle 'snipMate'
 Bundle 'nielsmadan/harlequin'
+Bundle 'arnaud-lb/vim-php-namespace'
 
 filetype plugin indent on
 "}}}
@@ -83,6 +84,7 @@ let g:tagbar_autoclose = 1
 map <Tab> :TagbarToggle<CR>
 
 set tags+=./tags;/$HOME
+set tags+=./tags.vendor;/$HOME
 
 " set spell
 
@@ -150,3 +152,5 @@ cabbrev %% %:h
 imap  
 
 set copyindent
+
+noremap <Leader>u :call PhpInsertUse()<CR>

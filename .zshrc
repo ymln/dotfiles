@@ -53,6 +53,7 @@ alias gs=''
 alias ack=ack-grep
 alias firefox-lite="firefox -P lite -no-remote"
 alias gh="git --git-dir=$HOME/.git-home --work-tree=$HOME"
+alias gp="git push && git push --tags"
 
 __git_files() {
   _wanted files expl 'index file' _path_files
