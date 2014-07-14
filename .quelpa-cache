@@ -1,0 +1,1 @@
+((twig-mode :fetcher github :repo "moljac024/twig-mode") (gnu-apl-mode :fetcher github :repo "lokedhs/gnu-apl-mode") (twig-mode) (gnu-apl-mode) (s) (coffee-mode) (find-file-in-project) (find-file-in-git-repo) (rainbow-delimiters) (smex) (clojure-project-mode) (clojure-test-mode) (zenburn-theme) (color-theme-solarized) (php-mode) (paredit) (project-mode) (evil))

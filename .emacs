@@ -1,62 +1,47 @@
 (package-initialize)
+(unless (require 'quelpa nil t)
+  (with-temp-buffer
+    (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
+    (eval-buffer)))
 
 (custom-set-variables
- '(ido-enable-flex-matching 1)
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (zenburn)))
+ '(custom-safe-themes (quote ("dd4db38519d2ad7eb9e2f30bc03fba61a7af49a185edfd44e020aa5345e3dca7" default)))
+ '(electric-indent-mode t)
  '(gnu-apl-executable "myapl")
  '(ido-enable-flex-matching t)
+ '(ido-mode (quote both) nil (ido))
  '(inhibit-startup-screen t)
- '(package-archives (("gnu" . "http://elpa.gnu.org/packages/")
-		     ("marmalade" . "http://marmalade-repo.org/packages/")
-		     ("melpa" . "http://melpa.milkbox.net/packages/")))
- '(inhibit-startup-screen t))
-
-(defvar my-packages '(evil project-mode paredit php-mode color-theme-solarized
-  zenburn-theme clojure-test-mode clojure-project-mode smex rainbow-delimiters
-  find-file-in-git-repo find-file-in-project coffee-mode s))
-(dolist (p my-packages)
-  (when (not (package-installed-p p))
-    (package-install p)))
-
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-
-(add-hook 'after-init-hook #'global-flycheck-mode)
-
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
-
-(add-to-list 'el-get-recipe-path "~/.el-get-user/recipes")
-(el-get 'sync)
+ '(menu-bar-mode nil)
+ '(package-archives (quote (("gnu" . "http://elpa.gnu.org/packages/") ("marmalade" . "http://marmalade-repo.org/packages/"))))
+ '(quelpa-persistent-cache-file "~/.quelpa-cache")
+ '(save-place t nil (saveplace))
+ '(scroll-conservatively 100000)
+ '(scroll-step 1)
+ '(show-paren-mode t)
+ '(tool-bar-mode nil)
+ '(windmove-wrap-around t))
 
 (require 'php-mode)
 (require 'gnu-apl-mode)
-
-;(load-theme 'zenburn t)
-
-(load-theme 'solarized-light t)
-
-(electric-indent-mode 1)
-
 (require 'ido)
-(ido-mode t)
+(require 'saveplace) 
+(require 'twig-mode)
 
 (require 'eproject)
 (require 'eproject-extras)
 (define-project-type git (generic) (look-for ".git"))
 
-(require 'anything)
-(require 'anything-git-grep)
-(require 'anything-match-plugin)
+;(require 'anything)
+;(require 'anything-git-grep)
+;(require 'anything-match-plugin)
 
 (require 'find-file-in-project)
 (add-to-list 'ffip-patterns "*.php")
-)
 
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
@@ -65,16 +50,12 @@
 (add-hook 'clojure-mode-hook 'clojure-test-mode)
 (add-hook 'gnu-apl-mode-hook (lambda () (set-input-method "APL-Z")))
 (add-hook 'gnu-apl-interactive-mode-hook (lambda () (set-input-method "APL-Z")))
-
-(show-paren-mode 1)
-
-(setq scroll-step 1
-      scroll-conservatively 100000)
-
 (add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
+(add-hook 'nrepl-repl-mode-hook 'paredit-mode)
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
 (setq nrepl-hide-special-buffers t)
 (setq nrepl-pop-to-repl-buffer-on-connect nil)
-(add-hook 'nrepl-repl-mode-hook 'paredit-mode)
 (setq nrepl-popup-stacktraces nil)
 (setq nrepl-popup-stacktraces-in-repl t)
 

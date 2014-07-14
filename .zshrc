@@ -31,7 +31,8 @@ zstyle ':vcs_info:*' formats \
   '%F{yellow}(%b)'
 PROMPT='%F{green}%n%F{yellow}@%F{green}%m${vcs_info_msg_0_} %F{green}%3~ %F{yellow}» %F{reset}'
 RPROMPT='[%*]'
-export EDITOR=vim
+export ALTERNATE_EDITOR=''
+export EDITOR='emacsclient -c -nw'
 export SVN_EDITOR=$EDITOR
 export GIT_EDITOR=$EDITOR
 export SHELL=/bin/zsh
