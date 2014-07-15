@@ -73,7 +73,7 @@ export PHPBREW_SET_PROMPT=1
 zstyle ':completion:*' auto-description '- %d'
 zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
 zstyle ':completion:*' expand prefix suffix
-zstyle ':completion:*:descriptions' format '%F{yellow}-- %d --%F{reset}'
+zstyle ':completion:*:descriptions' format "-- %d% --"
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' ignore-parents parent pwd .. directory
 zstyle ':completion:*' insert-unambiguous true
