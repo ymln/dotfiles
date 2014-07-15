@@ -53,6 +53,12 @@ __git_files() {
   _wanted files expl 'index file' _path_files
 }
 
+if [ -f "${HOME}/.gpg-agent-info" ]; then
+  . "${HOME}/.gpg-agent-info"
+  export GPG_AGENT_INFO
+  export SSH_AUTH_SOCK
+fi
+
 #[[ $TERM == rxvt-unicode-256color ]] && export TERM=rxvt
 ## Unbind ctrl+s
 stty -ixon
