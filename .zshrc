@@ -1,7 +1,7 @@
 ## fasd
 eval "$(fasd --init auto)"
 
-setopt PROMPT_SUBST AUTO_CD HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE EXTENDEDGLOB
+setopt PROMPT_SUBST AUTO_CD HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE EXTENDEDGLOB INC_APPEND_HISTORY SHARE_HISTORY
 autoload -Uz vcs_info
 
 bindkey -e
@@ -92,3 +92,11 @@ compinit
 
 bindkey '^R' history-incremental-pattern-search-backward
 bindkey '^S' history-incremental-pattern-search-forward
+
+if [ -f "${HOME}/.gpg-agent-info" ]; then
+  . "${HOME}/.gpg-agent-info"
+  export GPG_AGENT_INFO
+  export SSH_AUTH_SOCK
+fi
+GPG_TTY=$(tty)
+export GPG_TTY
