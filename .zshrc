@@ -17,7 +17,8 @@ PROMPT='%F{green}%n%F{yellow}@%F{green}%m${vcs_info_msg_0_} %F{green}%3~ %F{yell
 RPROMPT='[%*]'
 
 export ALTERNATE_EDITOR=''
-export EDITOR='emacsclient -c -nw'
+
+export EDITOR=EDITOR
 export SVN_EDITOR=$EDITOR
 export GIT_EDITOR=$EDITOR
 export SHELL=/bin/zsh
