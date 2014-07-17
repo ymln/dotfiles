@@ -47,6 +47,7 @@ alias ack=ack-grep
 alias firefox-lite="firefox -P lite -no-remote"
 alias gh="git --git-dir=$HOME/.githome --work-tree=$HOME"
 alias gp="git push && git push --tags"
+alias gd="git describe --tags"
 alias ls="ls --group-directories-first --color=auto"
 
 # Fix long git autocomplete
