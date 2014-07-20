@@ -17,7 +17,8 @@ PROMPT='%F{green}%n%F{yellow}@%F{green}%m${vcs_info_msg_0_} %F{green}%3~ %F{yell
 RPROMPT='[%*]'
 
 export ALTERNATE_EDITOR=''
-export EDITOR='emacsclient -c -nw'
+
+export EDITOR=EDITOR
 export SVN_EDITOR=$EDITOR
 export GIT_EDITOR=$EDITOR
 export SHELL=/bin/zsh
@@ -47,6 +48,7 @@ alias ack=ack-grep
 alias firefox-lite="firefox -P lite -no-remote"
 alias gh="git --git-dir=$HOME/.githome --work-tree=$HOME"
 alias gp="git push && git push --tags"
+alias gd="git describe --tags"
 alias ls="ls --group-directories-first --color=auto"
 
 # Fix long git autocomplete
