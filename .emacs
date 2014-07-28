@@ -36,6 +36,7 @@
  '(scroll-conservatively 100000)
  '(scroll-step 1)
  '(show-paren-mode t)
+ '(show-trailing-whitespace t)
  '(smartparens-global-mode t)
  '(standard-indent 4)
  '(tool-bar-mode nil)
@@ -116,3 +117,8 @@
 (global-set-key (kbd "C-x C-r") 'helm-recentf)
 (global-set-key (kbd "C-x C-b") 'helm-mini)
 (global-set-key (kbd "M-s o") 'helm-occur)
+
+(defun quelpa-install-all ()
+  (dolist (p (quelpa-read-cache))
+    (unless (package-installed-p (car p))
+      (quelpa p))))
