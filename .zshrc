@@ -50,6 +50,7 @@ alias gh="git --git-dir=$HOME/.githome --work-tree=$HOME"
 alias gp="git push && git push --tags"
 alias gd="git describe --tags"
 alias ls="ls --group-directories-first --color=auto"
+alias sl=ls
 
 # Fix long git autocomplete
 __git_files() {

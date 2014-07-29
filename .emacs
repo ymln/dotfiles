@@ -63,6 +63,7 @@
 (require 'dtrt-indent)
 (require 'twig-mode)
 (require 'wrap-region)
+(require 'multiple-cursors)
 
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
@@ -116,3 +117,5 @@
 (global-set-key (kbd "C-x C-r") 'helm-recentf)
 (global-set-key (kbd "C-x C-b") 'helm-mini)
 (global-set-key (kbd "M-s o") 'helm-occur)
+
+(global-set-key (kbd "C-z") 'mc/edit-lines)
