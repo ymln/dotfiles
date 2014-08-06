@@ -15,12 +15,15 @@
  '(dtrt-indent-require-confirmation-flag t)
  '(electric-indent-mode t)
  '(electric-pair-mode t)
+ '(global-rainbow-delimiters-mode t)
  '(gnu-apl-executable "myapl")
  '(helm-buffer-details-flag nil)
  '(helm-buffers-fuzzy-matching t)
+ '(helm-google-search-function (quote helm-google-api-search))
  '(helm-match-plugin-mode t nil (helm-match-plugin))
  '(helm-mode t)
  '(helm-quick-update t)
+ '(highlight-symbol-idle-delay 0)
  '(hippie-expand-try-functions-list (quote (try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-expand-line try-expand-line-all-buffers try-expand-list try-complete-lisp-symbol-partially try-complete-lisp-symbol)))
  '(ido-enable-flex-matching t)
  '(indent-tabs-mode nil)
@@ -66,19 +69,17 @@
 (require 'wrap-region)
 (require 'multiple-cursors)
 
-(add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'clojure-mode-hook 'paredit-mode)
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'clojure-mode-hook 'clojure-test-mode)
 (add-hook 'gnu-apl-mode-hook (lambda () (set-input-method "APL-Z")))
 (add-hook 'gnu-apl-interactive-mode-hook (lambda () (set-input-method "APL-Z")))
-(add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
-(add-hook 'nrepl-repl-mode-hook 'paredit-mode)
+(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (add-hook 'sgml-mode-hook (lambda ()
                             (set (make-local-variable 'sgml-basic-offset) 4)
                             (sgml-guess-indent)))
+(add-hook 'prog-mode-hook 'highlight-symbol-mode)
+(add-hook 'prog-mode-hook 'paredit-mode)
 
 (defun my-create-newline-and-enter-sexp (&rest _ignored)
   "Open a new brace or bracket expression, with relevant newlines and indent. "
@@ -89,9 +90,8 @@
 
 
 (setq nrepl-hide-special-buffers t)
-(setq nrepl-pop-to-repl-buffer-on-connect nil)
-(setq nrepl-popup-stacktraces nil)
-(setq nrepl-popup-stacktraces-in-repl t)
+(setq nrepl-pop-to-buffer-on-connect nil)
+(setq cider-show-error-buffer 'only-in-repl)
 
 (global-set-key (kbd "C-x f") 'helm-projectile)
 
@@ -120,6 +120,7 @@
 (global-set-key (kbd "M-s o") 'helm-occur)
 
 (defun quelpa-install-all ()
+  (interactive)
   (dolist (p (quelpa-read-cache))
     (unless (package-installed-p (car p))
       (quelpa p))))
