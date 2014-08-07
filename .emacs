@@ -3,6 +3,7 @@
   (with-temp-buffer
     (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
     (eval-buffer)))
+(load "local" t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -15,13 +16,15 @@
  '(dtrt-indent-require-confirmation-flag t)
  '(electric-indent-mode t)
  '(electric-pair-mode t)
+ '(global-auto-revert-mode t)
+ '(global-subword-mode t)
  '(gnu-apl-executable "myapl")
  '(helm-buffer-details-flag nil)
  '(helm-buffers-fuzzy-matching t)
  '(helm-match-plugin-mode t nil (helm-match-plugin))
  '(helm-mode t)
  '(helm-quick-update t)
- '(hippie-expand-try-functions-list (quote (try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-expand-line try-expand-line-all-buffers try-expand-list try-complete-lisp-symbol-partially try-complete-lisp-symbol)))
+ '(hippie-expand-try-functions-list (quote (yas-hippie-try-expand try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-expand-line try-expand-line-all-buffers try-expand-list try-complete-lisp-symbol-partially try-complete-lisp-symbol)))
  '(ido-enable-flex-matching t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
@@ -40,9 +43,11 @@
  '(smartparens-global-mode t)
  '(standard-indent 4)
  '(tool-bar-mode nil)
+ '(which-function-mode t)
  '(windmove-wrap-around t)
  '(wrap-region-global-mode t nil (wrap-region))
- '(yas-global-mode t nil (yasnippet)))
+ '(yas-global-mode t nil (yasnippet))
+ '(yas-snippet-dirs (quote ("~/.emacs.d/snippets")) nil (yasnippet)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -65,20 +70,24 @@
 (require 'twig-mode)
 (require 'wrap-region)
 (require 'multiple-cursors)
+(require 'jira)
 
-(add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'clojure-mode-hook 'paredit-mode)
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'clojure-mode-hook 'clojure-test-mode)
 (add-hook 'gnu-apl-mode-hook (lambda () (set-input-method "APL-Z")))
 (add-hook 'gnu-apl-interactive-mode-hook (lambda () (set-input-method "APL-Z")))
 (add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
-(add-hook 'nrepl-repl-mode-hook 'paredit-mode)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (add-hook 'sgml-mode-hook (lambda ()
                             (set (make-local-variable 'sgml-basic-offset) 4)
                             (sgml-guess-indent)))
+(add-hook 'prog-mode-hook 'paredit-mode)
+;(add-hook 'prog-mode-hook (lambda () (modify-syntax-entry \{ "w")))
+
+(setq paredit-space-for-delimiter-predicates
+      (list (lambda (endp delimiter)
+              (if (memq major-mode '(php-mode twig-mode)) nil t))))
 
 (defun my-create-newline-and-enter-sexp (&rest _ignored)
   "Open a new brace or bracket expression, with relevant newlines and indent. "
@@ -107,9 +116,10 @@
 
 (global-set-key (kbd "M-o") (lambda ()
 			      (interactive)
-			      (previous-line)
-			      (move-end-of-line nil)
-			      (newline)))
+                              (move-beginning-of-line nil)
+			      (newline)
+                              (previous-line)
+                              (indent-for-tab-command)))
 (global-set-key (kbd "C-o") (lambda ()
 			      (interactive)
 			      (move-end-of-line nil)
@@ -119,10 +129,20 @@
 (global-set-key (kbd "C-x C-b") 'helm-mini)
 (global-set-key (kbd "M-s o") 'helm-occur)
 
+(setq packages '((dtrt-indent :fetcher git :url "http://git.savannah.gnu.org/r/dtrt-indent.git")
+                 (quelpa :repo "quelpa/quelpa" :fetcher github)
+                 (gnu-apl-mode :fetcher github :repo "lokedhs/gnu-apl-mode")
+                 skype key-chord w3m jump-char xml-rpc jira ace-jump-mode ag helm-ag
+                 multiple-cursors wrap-region  expand-region helm-swoop helm-projectile
+                 projectile helm yasnippet flycheck eproject twig-mode gnu-apl-mode s
+                 coffee-mode find-file-in-project find-file-in-git-repo rainbow-delimiters
+                 zenburn-theme php-mode paredit))
+
 (defun quelpa-install-all ()
-  (dolist (p (quelpa-read-cache))
-    (unless (package-installed-p (car p))
-      (quelpa p))))
+  (dolist (p packages)
+    (let ((pkg (if (listp pkg) (car pkg) pkg)))
+      (unless (package-installed-p (car p))
+        (quelpa p)))))
 
 (global-set-key (kbd "C-z") 'mc/edit-lines)
 
@@ -141,3 +161,47 @@
   "Map the return key with `newline-and-indent'"
   (local-set-key (kbd "RET") 'newline-and-indent))
 (add-hook 'python-mode-hook 'set-newline-and-indent)
+
+(defun additional-newline (&optional arg)
+  (interactive "p")
+  (if (and (looking-back "{")
+           (looking-at   "}"))
+      (progn
+        (newline)
+        (previous-line)
+        (move-end-of-line nil)))
+  (newline arg))
+(add-hook 'c-mode-hook (lambda () (local-set-key (kbd "RET") 'additional-newline)))
+
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+
+(defun do-in-root (f)
+  (if (projectile-project-p)
+      (funcall f (projectile-project-root))
+      (error "You're not in project")))
+(defun helm-do-ag-in-root ()
+  (interactive)
+  (do-in-root 'helm-do-ag))
+(defun do-ag-in-root (string)
+  (interactive (list (read-from-minibuffer "Search string: " (ag/dwim-at-point))))
+  (do-in-root '(lambda (root) (ag/search string root))))
+
+(global-set-key (kbd "C-c a") 'helm-do-ag-in-root)
+(global-set-key (kbd "C-c C-a") 'do-ag-in-root)
+
+(global-set-key (kbd "C-c r") 'helm-resume)
+
+(global-set-key (kbd "C-c SPC") 'ace-jump-word-mode)
+
+(global-set-key (kbd "C-,") 'call-last-kbd-macro)
+
+(defun quit-other-window ()
+  (interactive)
+  (quit-window nil (next-window)))
+(global-set-key (kbd "M-Q") 'quit-other-window)
+
+(global-set-key (kbd "M-i") 'helm-imenu)
+
+(global-set-key (kbd "C-<") (lambda () (interactive) (move-to-window-line 0)))
+(global-set-key (kbd "C->") (lambda () (interactive) (move-to-window-line -1)))
+(global-set-key (kbd "C-S-m") (lambda () (interactive) (move-to-window-line nil)))
