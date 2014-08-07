@@ -18,13 +18,16 @@
  '(electric-pair-mode t)
  '(global-auto-revert-mode t)
  '(global-subword-mode t)
+ '(global-rainbow-delimiters-mode t)
  '(gnu-apl-executable "myapl")
  '(helm-buffer-details-flag nil)
  '(helm-buffers-fuzzy-matching t)
+ '(helm-google-search-function (quote helm-google-api-search))
  '(helm-match-plugin-mode t nil (helm-match-plugin))
  '(helm-mode t)
  '(helm-quick-update t)
- '(hippie-expand-try-functions-list (quote (yas-hippie-try-expand try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-expand-line try-expand-line-all-buffers try-expand-list try-complete-lisp-symbol-partially try-complete-lisp-symbol)))
+ '(highlight-symbol-idle-delay 0)
+ '(hippie-expand-try-functions-list (quote (yas-hippie-try-expand yas-hippie-try-expand try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-expand-line try-expand-line-all-buffers try-expand-list try-complete-lisp-symbol-partially try-complete-lisp-symbol)))
  '(ido-enable-flex-matching t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
@@ -74,20 +77,20 @@
 
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'clojure-mode-hook 'clojure-test-mode)
 (add-hook 'gnu-apl-mode-hook (lambda () (set-input-method "APL-Z")))
 (add-hook 'gnu-apl-interactive-mode-hook (lambda () (set-input-method "APL-Z")))
-(add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
+(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (add-hook 'sgml-mode-hook (lambda ()
                             (set (make-local-variable 'sgml-basic-offset) 4)
                             (sgml-guess-indent)))
-(add-hook 'prog-mode-hook 'paredit-mode)
 ;(add-hook 'prog-mode-hook (lambda () (modify-syntax-entry \{ "w")))
 
 (setq paredit-space-for-delimiter-predicates
       (list (lambda (endp delimiter)
               (if (memq major-mode '(php-mode twig-mode)) nil t))))
+(add-hook 'prog-mode-hook 'highlight-symbol-mode)
+(add-hook 'prog-mode-hook 'paredit-mode)
 
 (defun my-create-newline-and-enter-sexp (&rest _ignored)
   "Open a new brace or bracket expression, with relevant newlines and indent. "
@@ -98,9 +101,8 @@
 
 
 (setq nrepl-hide-special-buffers t)
-(setq nrepl-pop-to-repl-buffer-on-connect nil)
-(setq nrepl-popup-stacktraces nil)
-(setq nrepl-popup-stacktraces-in-repl t)
+(setq nrepl-pop-to-buffer-on-connect nil)
+(setq cider-show-error-buffer 'only-in-repl)
 
 (global-set-key (kbd "C-x f") 'helm-projectile)
 
@@ -129,22 +131,24 @@
 (global-set-key (kbd "C-x C-b") 'helm-mini)
 (global-set-key (kbd "M-s o") 'helm-occur)
 
-(setq packages '((dtrt-indent :fetcher git :url "http://git.savannah.gnu.org/r/dtrt-indent.git")
-                 (quelpa :repo "quelpa/quelpa" :fetcher github)
+(setq packages '((quelpa :repo "quelpa/quelpa" :fetcher github)
+                 (dtrt-indent :fetcher git :url "http://git.savannah.gnu.org/r/dtrt-indent.git")
                  (gnu-apl-mode :fetcher github :repo "lokedhs/gnu-apl-mode")
+                 (mingus :fetcher github :repo "pft/mingus")
                  skype key-chord w3m jump-char xml-rpc jira ace-jump-mode ag helm-ag
-                 multiple-cursors wrap-region  expand-region helm-swoop helm-projectile
+                 multiple-cursors wrap-region expand-region helm-swoop helm-projectile
                  projectile helm yasnippet flycheck eproject twig-mode gnu-apl-mode s
                  coffee-mode find-file-in-project find-file-in-git-repo rainbow-delimiters
-                 zenburn-theme php-mode paredit))
+                 zenburn-theme php-mode paredit helm-google highlight-symbol cider))
 
 (defun quelpa-install-all ()
+  (interactive)
   (dolist (p packages)
-    (let ((pkg (if (listp pkg) (car pkg) pkg)))
-      (unless (package-installed-p (car p))
-        (quelpa p)))))
+    (let ((pkg (or (car-safe p) p)))
+      (unless (package-installed-p pkg)
+        (quelpa pkg)))))
 
-(global-set-key (kbd "C-z") 'mc/edit-lines)
+(global-set-key (kbd "C-z") 'mc/mark-all-dwim)
 
 ;;; Indentation for python
 
