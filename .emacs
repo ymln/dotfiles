@@ -156,7 +156,7 @@
 ;; Ignoring electric indentation
 (defun electric-indent-ignore-python (char)
   "Ignore electric indentation for python-mode"
-  (if (equal major-mode 'python-mode)
+  (if (memq major-mode '(python-mode org-mode))
       `no-indent'
     nil))
 (add-hook 'electric-indent-functions 'electric-indent-ignore-python)
@@ -209,6 +209,6 @@
 
 (global-set-key (kbd "C-<") (lambda () (interactive) (move-to-window-line 0)))
 (global-set-key (kbd "C->") (lambda () (interactive) (move-to-window-line -1)))
-(global-set-key (kbd "C-m") (lambda () (interactive) (move-to-window-line nil)))
+(global-set-key (kbd "C-S-M") (lambda () (interactive) (move-to-window-line nil)))
 
 (global-set-key (kbd "M-g s") 'magit-status)
