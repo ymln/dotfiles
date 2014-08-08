@@ -16,3 +16,4 @@ map <lt> :tabmove!<Space>-1<Return>
 map > :tabmove!<Space>+1<Return>
 set defsearch=g
 source! ~/.vimperatorrc.local
+set editor=EDITOR

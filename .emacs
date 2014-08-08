@@ -17,8 +17,8 @@
  '(electric-indent-mode t)
  '(electric-pair-mode t)
  '(global-auto-revert-mode t)
- '(global-subword-mode t)
  '(global-rainbow-delimiters-mode t)
+ '(global-subword-mode t)
  '(gnu-apl-executable "myapl")
  '(helm-buffer-details-flag nil)
  '(helm-buffers-fuzzy-matching t)
@@ -32,6 +32,7 @@
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(menu-bar-mode nil)
+ '(org-agenda-files (quote ("~/todo.org")))
  '(package-archives (quote (("gnu" . "http://elpa.gnu.org/packages/") ("marmalade" . "http://marmalade-repo.org/packages/"))))
  '(projectile-global-mode t)
  '(projectile-switch-project-action (quote helm-projectile))
@@ -208,4 +209,6 @@
 
 (global-set-key (kbd "C-<") (lambda () (interactive) (move-to-window-line 0)))
 (global-set-key (kbd "C->") (lambda () (interactive) (move-to-window-line -1)))
-(global-set-key (kbd "C-S-m") (lambda () (interactive) (move-to-window-line nil)))
+(global-set-key (kbd "C-m") (lambda () (interactive) (move-to-window-line nil)))
+
+(global-set-key (kbd "M-g s") 'magit-status)
