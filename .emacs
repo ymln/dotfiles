@@ -10,11 +10,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(browse-url-browser-function (quote w3m-browse-url))
+ '(browse-url-new-window-flag t)
  '(custom-enabled-themes (quote (zenburn)))
- '(custom-safe-themes (quote ("5ba11ea18c2ebed659a8d5dac66675a44015979444f88cb4b577983f5190fd8e" "dd4db38519d2ad7eb9e2f30bc03fba61a7af49a185edfd44e020aa5345e3dca7" default)))
+ '(custom-safe-themes (quote ("a7328f552001f136cb5364dab72c58cf92cf6ccb9529c68e1e14cf73e92e0768" "5ba11ea18c2ebed659a8d5dac66675a44015979444f88cb4b577983f5190fd8e" "dd4db38519d2ad7eb9e2f30bc03fba61a7af49a185edfd44e020aa5345e3dca7" default)))
  '(dtrt-indent-mode t nil (dtrt-indent))
- '(dtrt-indent-require-confirmation-flag t)
- '(electric-indent-mode t)
+ '(dtrt-indent-require-confirmation-flag nil)
+ '(electric-indent-mode nil)
  '(electric-pair-mode t)
  '(global-auto-revert-mode t)
  '(global-rainbow-delimiters-mode t)
@@ -23,11 +25,12 @@
  '(helm-buffer-details-flag nil)
  '(helm-buffers-fuzzy-matching t)
  '(helm-google-search-function (quote helm-google-api-search))
+ '(helm-google-suggest-use-curl-p nil)
  '(helm-match-plugin-mode t nil (helm-match-plugin))
  '(helm-mode t)
  '(helm-quick-update t)
  '(highlight-symbol-idle-delay 0)
- '(hippie-expand-try-functions-list (quote (yas-hippie-try-expand yas-hippie-try-expand try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-expand-line try-expand-line-all-buffers try-expand-list try-complete-lisp-symbol-partially try-complete-lisp-symbol)))
+ '(hippie-expand-try-functions-list (quote (yas-hippie-try-expand try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-expand-line try-expand-line-all-buffers try-expand-list try-complete-lisp-symbol-partially try-complete-lisp-symbol)))
  '(ido-enable-flex-matching t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
@@ -35,7 +38,7 @@
  '(org-agenda-files (quote ("~/todo.org")))
  '(package-archives (quote (("gnu" . "http://elpa.gnu.org/packages/") ("marmalade" . "http://marmalade-repo.org/packages/"))))
  '(projectile-global-mode t)
- '(projectile-switch-project-action (quote helm-projectile))
+ '(projectile-switch-project-action (quote (lambda nil (dired "."))))
  '(quelpa-persistent-cache-file "~/.quelpa-cache")
  '(recentf-max-saved-items 1000000)
  '(recentf-mode t)
@@ -47,9 +50,11 @@
  '(smartparens-global-mode t)
  '(standard-indent 4)
  '(tool-bar-mode nil)
+ '(w3m-use-title-buffer-name t)
  '(which-function-mode t)
  '(windmove-wrap-around t)
  '(wrap-region-global-mode t nil (wrap-region))
+ '(x-select-enable-primary t)
  '(yas-global-mode t nil (yasnippet))
  '(yas-snippet-dirs (quote ("~/.emacs.d/snippets")) nil (yasnippet)))
 
@@ -93,13 +98,18 @@
 (add-hook 'prog-mode-hook 'highlight-symbol-mode)
 (add-hook 'prog-mode-hook 'paredit-mode)
 
+(add-hook 'w3m-mode-hook (lambda ()
+                          (local-set-key (kbd ",") 'w3m-previous-buffer)
+                          (local-set-key (kbd ".") 'w3m-next-buffer)
+                          (local-set-key (kbd "q") (lambda () (interactive) (kill-buffer nil)))
+                          (w3m-lnum-mode 1)))
+
 (defun my-create-newline-and-enter-sexp (&rest _ignored)
   "Open a new brace or bracket expression, with relevant newlines and indent. "
   (newline)
   (indent-according-to-mode)
   (forward-line -1)
   (indent-according-to-mode))
-
 
 (setq nrepl-hide-special-buffers t)
 (setq nrepl-pop-to-buffer-on-connect nil)
@@ -122,7 +132,7 @@
                               (move-beginning-of-line nil)
 			      (newline)
                               (previous-line)
-                              (indent-for-tab-command)))
+                              (indent-according-to-mode)))
 (global-set-key (kbd "C-o") (lambda ()
 			      (interactive)
 			      (move-end-of-line nil)
@@ -140,7 +150,7 @@
                  multiple-cursors wrap-region expand-region helm-swoop helm-projectile
                  projectile helm yasnippet flycheck eproject twig-mode gnu-apl-mode s
                  coffee-mode find-file-in-project find-file-in-git-repo rainbow-delimiters
-                 zenburn-theme php-mode paredit helm-google highlight-symbol cider))
+                 zenburn-theme php-mode paredit helm-google highlight-symbol cider yaml-mode))
 
 (defun quelpa-install-all ()
   (interactive)
@@ -149,33 +159,19 @@
       (unless (package-installed-p pkg)
         (quelpa pkg)))))
 
-(global-set-key (kbd "C-z") 'mc/mark-all-dwim)
+(global-set-key (kbd "C-z") 'mc/edit-lines)
 
-;;; Indentation for python
-
-;; Ignoring electric indentation
-(defun electric-indent-ignore-python (char)
-  "Ignore electric indentation for python-mode"
-  (if (memq major-mode '(python-mode org-mode))
-      `no-indent'
-    nil))
-(add-hook 'electric-indent-functions 'electric-indent-ignore-python)
-
-;; Enter key executes newline-and-indent
-(defun set-newline-and-indent ()
-  "Map the return key with `newline-and-indent'"
-  (local-set-key (kbd "RET") 'newline-and-indent))
-(add-hook 'python-mode-hook 'set-newline-and-indent)
+(global-set-key (kbd "RET") 'newline-and-indent)
 
 (defun additional-newline (&optional arg)
   (interactive "p")
   (if (and (looking-back "{")
            (looking-at   "}"))
       (progn
-        (newline)
+        (newline-and-indent)
         (previous-line)
         (move-end-of-line nil)))
-  (newline arg))
+  (newline-and-indent))
 (add-hook 'c-mode-hook (lambda () (local-set-key (kbd "RET") 'additional-newline)))
 
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
@@ -191,12 +187,27 @@
   (interactive (list (read-from-minibuffer "Search string: " (ag/dwim-at-point))))
   (do-in-root '(lambda (root) (ag/search string root))))
 
+(require 'helm-ag)
+; Overriden function to make ag ignore case
+(defun helm-ag--do-ag-candidate-process ()
+ (let* ((default-directory (or helm-ag-default-directory default-directory))
+        (proc (start-process "helm-do-ag" nil
+                             "ag" "-i" "--nocolor" "--nogroup" "--" helm-pattern)))
+    (prog1 proc
+      (set-process-sentinel
+       proc
+       (lambda (process event)
+         (helm-process-deferred-sentinel-hook
+          process event (helm-default-directory))
+         (when (string= event "finished\n")
+           (helm-ag--do-ag-propertize)))))))
+
 (global-set-key (kbd "C-c a") 'helm-do-ag-in-root)
 (global-set-key (kbd "C-c C-a") 'do-ag-in-root)
 
 (global-set-key (kbd "C-c r") 'helm-resume)
 
-(global-set-key (kbd "C-c SPC") 'ace-jump-word-mode)
+(global-set-key (kbd "C-c SPC") 'ace-jump-char-mode)
 
 (global-set-key (kbd "C-,") 'call-last-kbd-macro)
 
@@ -212,3 +223,5 @@
 (global-set-key (kbd "C-S-M") (lambda () (interactive) (move-to-window-line nil)))
 
 (global-set-key (kbd "M-g s") 'magit-status)
+
+(global-set-key (kbd "C-h j") 'helm-google)
