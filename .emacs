@@ -30,7 +30,7 @@
  '(helm-mode t)
  '(helm-quick-update t)
  '(highlight-symbol-idle-delay 0)
- '(hippie-expand-try-functions-list (quote (yas-hippie-try-expand yas-hippie-try-expand try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-expand-line try-expand-line-all-buffers try-expand-list try-complete-lisp-symbol-partially try-complete-lisp-symbol)))
+ '(hippie-expand-try-functions-list (quote (yas-hippie-try-expand try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-expand-line try-expand-line-all-buffers try-expand-list try-complete-lisp-symbol-partially try-complete-lisp-symbol)))
  '(ido-enable-flex-matching t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
@@ -50,7 +50,6 @@
  '(smartparens-global-mode t)
  '(standard-indent 4)
  '(tool-bar-mode nil)
- '(w3m-session-load-last-sessions t)
  '(w3m-use-title-buffer-name t)
  '(which-function-mode t)
  '(windmove-wrap-around t)
@@ -133,7 +132,7 @@
                               (move-beginning-of-line nil)
 			      (newline)
                               (previous-line)
-                              (indent-for-tab-command)))
+                              (indent-according-to-mode)))
 (global-set-key (kbd "C-o") (lambda ()
 			      (interactive)
 			      (move-end-of-line nil)
@@ -160,7 +159,7 @@
       (unless (package-installed-p pkg)
         (quelpa pkg)))))
 
-(global-set-key (kbd "C-z") 'mc/mark-all-dwim)
+(global-set-key (kbd "C-z") 'mc/edit-lines)
 
 (global-set-key (kbd "RET") 'newline-and-indent)
 
