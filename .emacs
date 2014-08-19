@@ -96,7 +96,8 @@
 
 (setq paredit-space-for-delimiter-predicates
       (list (lambda (endp delimiter)
-              (if (memq major-mode '(php-mode twig-mode js-mode)) nil t))))
+              (if (memq major-mode '(php-mode twig-mode c++-mode js-mode)) nil t))))
+
 (add-hook 'prog-mode-hook 'highlight-symbol-mode)
 (add-hook 'prog-mode-hook 'paredit-mode)
 
