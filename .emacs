@@ -34,6 +34,7 @@
  '(ido-enable-flex-matching t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
+ '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(menu-bar-mode nil)
  '(org-agenda-files (quote ("~/todo.org")))
  '(package-archives (quote (("gnu" . "http://elpa.gnu.org/packages/") ("marmalade" . "http://marmalade-repo.org/packages/"))))
@@ -55,6 +56,7 @@
  '(windmove-wrap-around t)
  '(wrap-region-global-mode t nil (wrap-region))
  '(ws-butler-global-mode t)
+ '(ws-butler-keep-whitespace-before-point nil)
  '(x-select-enable-primary t)
  '(yas-global-mode t nil (yasnippet))
  '(yas-snippet-dirs (quote ("~/.emacs.d/snippets")) nil (yasnippet)))
@@ -229,3 +231,5 @@
 (global-set-key (kbd "M-g s") 'magit-status)
 
 (global-set-key (kbd "C-h j") 'helm-google)
+
+(setq ace-jump-mode-move-keys (loop for i from ?a to ?z collect i))
