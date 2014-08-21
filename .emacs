@@ -34,6 +34,7 @@
  '(ido-enable-flex-matching t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
+ '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(menu-bar-mode nil)
  '(org-agenda-files (quote ("~/todo.org")))
  '(package-archives (quote (("gnu" . "http://elpa.gnu.org/packages/") ("marmalade" . "http://marmalade-repo.org/packages/"))))
@@ -54,6 +55,8 @@
  '(which-function-mode t)
  '(windmove-wrap-around t)
  '(wrap-region-global-mode t nil (wrap-region))
+ '(ws-butler-global-mode t)
+ '(ws-butler-keep-whitespace-before-point nil)
  '(x-select-enable-primary t)
  '(yas-global-mode t nil (yasnippet))
  '(yas-snippet-dirs (quote ("~/.emacs.d/snippets")) nil (yasnippet)))
@@ -80,6 +83,7 @@
 (require 'wrap-region)
 (require 'multiple-cursors)
 (require 'jira)
+(require 'ws-butler)
 
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
@@ -94,7 +98,8 @@
 
 (setq paredit-space-for-delimiter-predicates
       (list (lambda (endp delimiter)
-              (if (memq major-mode '(php-mode twig-mode c++-mode python-mode)) nil t))))
+              (if (memq major-mode '(php-mode twig-mode c++-mode python-mode js-mode)) nil t))))
+
 (add-hook 'prog-mode-hook 'highlight-symbol-mode)
 (add-hook 'prog-mode-hook 'paredit-mode)
 
@@ -150,7 +155,8 @@
                  multiple-cursors wrap-region expand-region helm-swoop helm-projectile
                  projectile helm yasnippet flycheck eproject twig-mode gnu-apl-mode s
                  coffee-mode find-file-in-project find-file-in-git-repo rainbow-delimiters
-                 zenburn-theme php-mode paredit helm-google highlight-symbol cider yaml-mode))
+                 zenburn-theme php-mode paredit helm-google highlight-symbol cider yaml-mode
+                 ws-butler))
 
 (defun quelpa-install-all ()
   (interactive)
@@ -225,3 +231,5 @@
 (global-set-key (kbd "M-g s") 'magit-status)
 
 (global-set-key (kbd "C-h j") 'helm-google)
+
+(setq ace-jump-mode-move-keys (loop for i from ?a to ?z collect i))
