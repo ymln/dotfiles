@@ -55,7 +55,6 @@
  '(which-function-mode t)
  '(windmove-wrap-around t)
  '(wrap-region-global-mode t nil (wrap-region))
- '(ws-butler-global-mode t)
  '(ws-butler-keep-whitespace-before-point nil)
  '(x-select-enable-primary t)
  '(yas-global-mode t nil (yasnippet))
@@ -84,6 +83,8 @@
 (require 'multiple-cursors)
 (require 'jira)
 (require 'ws-butler)
+(require 'key-chord)
+(key-chord-mode 1)
 
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
@@ -233,3 +234,11 @@
 (global-set-key (kbd "C-h j") 'helm-google)
 
 (setq ace-jump-mode-move-keys (loop for i from ?a to ?z collect i))
+
+(global-set-key (kbd "M-n") 'highlight-symbol-next)
+(global-set-key (kbd "M-p") 'highlight-symbol-prev)
+
+(key-chord-define-global "df" 'ace-jump-char-mode)
+
+(unless (daemonp)
+    (ws-butler-global-mode 1))
