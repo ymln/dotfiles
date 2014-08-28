@@ -242,3 +242,7 @@
 
 (unless (daemonp)
     (ws-butler-global-mode 1))
+
+(setq frame-title-format "emacs: %b")
+
+(defalias 'yes-or-no-p 'y-or-n-p)
