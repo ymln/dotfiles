@@ -91,6 +91,8 @@
 (require 'multiple-cursors)
 (require 'jira)
 (require 'ws-butler)
+(require 'key-chord)
+(key-chord-mode 1)
 
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
@@ -242,6 +244,15 @@
 
 (setq ace-jump-mode-move-keys (loop for i from ?a to ?z collect i))
 
+(global-set-key (kbd "M-n") 'highlight-symbol-next)
+(global-set-key (kbd "M-p") 'highlight-symbol-prev)
+
+(key-chord-define-global "df" 'ace-jump-char-mode)
+
 ; temporary fix for https://github.com/lewang/ws-butler/issues/4
 (unless (daemonp)
-  (setq ws-butler-global-mode t))
+    (ws-butler-global-mode t))
+
+(setq frame-title-format "emacs: %b")
+
+(defalias 'yes-or-no-p 'y-or-n-p)
