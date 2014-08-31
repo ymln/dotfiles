@@ -52,6 +52,7 @@ alias gp="git push && git push --tags"
 alias gd="git describe --tags"
 alias ls="ls --group-directories-first --color=auto"
 alias sl=ls
+alias m="fasd -e mpv"
 
 function e {
   $EDITOR $@ &> /dev/null &!
