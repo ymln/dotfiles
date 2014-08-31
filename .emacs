@@ -175,7 +175,7 @@
       (unless (package-installed-p pkg)
         (quelpa pkg)))))
 
-(global-set-key (kbd "C-z") 'mc/edit-lines)
+(global-set-key (kbd "C-z") 'mc/mark-all-dwim)
 
 (global-set-key (kbd "RET") 'newline-and-indent)
 
