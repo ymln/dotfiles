@@ -243,6 +243,6 @@
 (unless (daemonp)
     (ws-butler-global-mode 1))
 
-(setq frame-title-format "emacs: %b")
+(setq frame-title-format '(:eval (if buffer-file-name "%f" "%b")))
 
 (defalias 'yes-or-no-p 'y-or-n-p)
