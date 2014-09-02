@@ -52,7 +52,11 @@ alias gp="git push && git push --tags"
 alias gd="git describe --tags"
 alias ls="ls --group-directories-first --color=auto"
 alias sl=ls
-alias e=EDITOR
+alias m="fasd -e mpv"
+
+function e {
+  $EDITOR $@ &> /dev/null &!
+}
 
 # Fix long git autocomplete
 __git_files() {
