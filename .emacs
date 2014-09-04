@@ -256,3 +256,5 @@
 (setq frame-title-format '(:eval (if buffer-file-name "%f" "%b")))
 
 (defalias 'yes-or-no-p 'y-or-n-p)
+
+(setq-default cursor-type 'bar)
