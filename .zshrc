@@ -117,3 +117,7 @@ select-word-style bash
 
 # Shift-tab
 bindkey '^[[Z' reverse-menu-complete
+
+if [ -f ~/local.sh ]; then
+   . ~/local.sh
+fi
