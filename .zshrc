@@ -58,6 +58,10 @@ function e {
   $EDITOR $@ &> /dev/null &!
 }
 
+function libre {
+  libreoffice --nologo $@ &!
+}
+
 # Fix long git autocomplete
 __git_files() {
   _wanted files expl 'index file' _path_files
