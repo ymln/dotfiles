@@ -53,6 +53,7 @@
  '(standard-indent 4)
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote post-forward-angle-brackets) nil (uniquify))
+ '(viper-mode nil)
  '(w3m-use-title-buffer-name t)
  '(which-function-mode t)
  '(windmove-wrap-around t)
