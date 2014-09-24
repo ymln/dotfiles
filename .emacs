@@ -87,6 +87,8 @@
 (require 'ws-butler)
 (require 'key-chord)
 (require 'uniquify)
+(require 'helm-ag)
+(require 'viper)
 
 (key-chord-mode 1)
 
@@ -199,7 +201,6 @@
   (interactive (list (read-from-minibuffer "Search string: " (ag/dwim-at-point))))
   (do-in-root '(lambda (root) (ag/search string root))))
 
-(require 'helm-ag)
 ; Overriden function to make ag ignore case
 (defun helm-ag--do-ag-candidate-process ()
  (let* ((default-directory (or helm-ag-default-directory default-directory))
@@ -254,3 +255,6 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (setq-default cursor-type 'bar)
+
+(global-set-key (kbd "M-f") 'viper-forward-word)
+(global-set-key (kbd "M-b") 'viper-backward-word)
