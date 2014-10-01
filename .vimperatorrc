@@ -14,6 +14,6 @@ map e :bdelete!<Space>
 map x :open<Space>d<Space>
 map <lt> :tabmove!<Space>-1<Return>
 map > :tabmove!<Space>+1<Return>
-set defsearch=g
+set defsearch=ddg
 source! ~/.vimperatorrc.local
 set editor=EDITOR

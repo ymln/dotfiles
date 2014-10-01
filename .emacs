@@ -61,6 +61,7 @@
  '(standard-indent 4)
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote post-forward-angle-brackets) nil (uniquify))
+ '(viper-mode nil)
  '(w3m-use-title-buffer-name t)
  '(which-function-mode t)
  '(windmove-wrap-around t)
@@ -95,6 +96,8 @@
 (require 'ws-butler)
 (require 'key-chord)
 (require 'uniquify)
+(require 'helm-ag)
+(require 'viper)
 
 (key-chord-mode 1)
 
@@ -207,7 +210,6 @@
   (interactive (list (read-from-minibuffer "Search string: " (ag/dwim-at-point))))
   (do-in-root '(lambda (root) (ag/search string root))))
 
-(require 'helm-ag)
 ; Overriden function to make ag ignore case
 (defun helm-ag--do-ag-candidate-process ()
  (let* ((default-directory (or helm-ag-default-directory default-directory))
@@ -262,3 +264,6 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (setq-default cursor-type 'bar)
+
+(global-set-key (kbd "M-f") 'viper-forward-word)
+(global-set-key (kbd "M-b") 'viper-backward-word)
