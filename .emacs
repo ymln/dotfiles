@@ -13,12 +13,15 @@
  '(browse-url-browser-function (quote w3m-browse-url))
  '(browse-url-new-window-flag t)
  '(custom-enabled-themes (quote (zenburn)))
- '(custom-safe-themes (quote ("a7328f552001f136cb5364dab72c58cf92cf6ccb9529c68e1e14cf73e92e0768" "5ba11ea18c2ebed659a8d5dac66675a44015979444f88cb4b577983f5190fd8e" "dd4db38519d2ad7eb9e2f30bc03fba61a7af49a185edfd44e020aa5345e3dca7" default)))
+ '(custom-safe-themes
+   (quote
+    ("a7328f552001f136cb5364dab72c58cf92cf6ccb9529c68e1e14cf73e92e0768" "5ba11ea18c2ebed659a8d5dac66675a44015979444f88cb4b577983f5190fd8e" "dd4db38519d2ad7eb9e2f30bc03fba61a7af49a185edfd44e020aa5345e3dca7" default)))
  '(dtrt-indent-mode t nil (dtrt-indent))
  '(dtrt-indent-require-confirmation-flag nil)
  '(electric-indent-mode nil)
  '(electric-pair-mode t)
  '(global-auto-revert-mode t)
+ '(global-color-identifiers-mode t)
  '(global-rainbow-delimiters-mode t)
  '(global-subword-mode t)
  '(gnu-apl-executable "myapl")
@@ -30,7 +33,9 @@
  '(helm-mode t)
  '(helm-quick-update t)
  '(highlight-symbol-idle-delay 0)
- '(hippie-expand-try-functions-list (quote (yas-hippie-try-expand try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-expand-line try-expand-line-all-buffers try-expand-list try-complete-lisp-symbol-partially try-complete-lisp-symbol)))
+ '(hippie-expand-try-functions-list
+   (quote
+    (yas-hippie-try-expand try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-expand-line try-expand-line-all-buffers try-expand-list try-complete-lisp-symbol-partially try-complete-lisp-symbol)))
  '(horizontal-scroll-bar-mode nil)
  '(ido-enable-flex-matching t)
  '(indent-tabs-mode nil)
@@ -38,7 +43,10 @@
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(menu-bar-mode nil)
  '(org-agenda-files (quote ("~/todo.org")))
- '(package-archives (quote (("gnu" . "http://elpa.gnu.org/packages/") ("marmalade" . "http://marmalade-repo.org/packages/"))))
+ '(package-archives
+   (quote
+    (("gnu" . "http://elpa.gnu.org/packages/")
+     ("marmalade" . "http://marmalade-repo.org/packages/"))))
  '(projectile-global-mode t)
  '(projectile-switch-project-action (quote (lambda nil (dired "."))))
  '(quelpa-persistent-cache-file "~/.quelpa-cache")
@@ -162,7 +170,7 @@
                  projectile helm yasnippet flycheck eproject twig-mode gnu-apl-mode s
                  coffee-mode find-file-in-project find-file-in-git-repo rainbow-delimiters
                  zenburn-theme php-mode paredit helm-google highlight-symbol cider yaml-mode
-                 ws-butle magit))
+                 ws-butle magit color-identifiers-mode))
 
 (defun quelpa-install-all ()
   (interactive)
