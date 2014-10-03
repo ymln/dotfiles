@@ -21,9 +21,10 @@
  '(electric-indent-mode nil)
  '(electric-pair-mode t)
  '(global-auto-revert-mode t)
- '(global-color-identifiers-mode t)
+ '(global-color-identifiers-mode nil)
  '(global-rainbow-delimiters-mode t)
  '(global-subword-mode t)
+ '(global-syntax-subword-mode t)
  '(gnu-apl-executable "myapl")
  '(helm-buffer-details-flag nil)
  '(helm-buffers-fuzzy-matching t)
@@ -168,6 +169,7 @@
                  (dtrt-indent :fetcher git :url "http://git.savannah.gnu.org/r/dtrt-indent.git")
                  (gnu-apl-mode :fetcher github :repo "lokedhs/gnu-apl-mode")
                  (mingus :fetcher github :repo "pft/mingus")
+                 (syntax-subword :fetcher hg :url "https://bitbucket.org/jpkotta/syntax-subword")
                  skype key-chord w3m jump-char xml-rpc jira ace-jump-mode ag helm-ag
                  multiple-cursors wrap-region expand-region helm-swoop helm-projectile
                  projectile helm yasnippet flycheck eproject twig-mode gnu-apl-mode s
@@ -265,5 +267,9 @@
 
 (setq-default cursor-type 'bar)
 
-(global-set-key (kbd "M-f") 'viper-forward-word)
-(global-set-key (kbd "M-b") 'viper-backward-word)
+;(global-set-key (kbd "M-f") 'viper-forward-word)
+;(global-set-key (kbd "M-b") 'viper-backward-word)
+
+(add-to-list 'color-identifiers:modes-alist
+             '(php-mode "[[:space:]]*" "\\([a-zA-Z_$]\\(?:\\s_\\|\\sw\\)*\\)"
+                       (nil font-lock-variable-name-face font-lock-function-name-face font-lock-constant-face font-lock-type-face default)))
