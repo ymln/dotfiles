@@ -21,7 +21,6 @@
  '(global-auto-revert-mode t)
  '(global-color-identifiers-mode nil)
  '(global-rainbow-delimiters-mode t)
- '(global-subword-mode t)
  '(global-syntax-subword-mode t)
  '(gnu-apl-executable "myapl")
  '(helm-buffer-details-flag nil)
