@@ -19,6 +19,7 @@
  '(dtrt-indent-require-confirmation-flag nil)
  '(electric-indent-mode nil)
  '(electric-pair-mode t)
+ '(evil-mode t)
  '(global-auto-revert-mode t)
  '(global-color-identifiers-mode nil)
  '(global-rainbow-delimiters-mode t)
@@ -50,6 +51,7 @@
  '(scheme-program-name "csi -:c")
  '(scroll-conservatively 100000)
  '(scroll-step 1)
+ '(select-enable-primary t)
  '(show-paren-mode t)
  '(show-trailing-whitespace t)
  '(smartparens-global-mode t)
@@ -62,7 +64,6 @@
  '(windmove-wrap-around t)
  '(wrap-region-global-mode t nil (wrap-region))
  '(ws-butler-keep-whitespace-before-point nil)
- '(x-select-enable-primary t)
  '(yas-global-mode t nil (yasnippet))
  '(yas-snippet-dirs (quote ("~/.emacs.d/snippets")) nil (yasnippet)))
 
@@ -170,7 +171,7 @@
                  projectile helm yasnippet flycheck eproject twig-mode gnu-apl-mode s
                  coffee-mode find-file-in-project find-file-in-git-repo rainbow-delimiters
                  zenburn-theme php-mode paredit helm-google highlight-symbol cider yaml-mode
-                 ws-butle magit color-identifiers-mode ggtags))
+                 ws-butler magit color-identifiers-mode evil ggtags))
 
 (defun quelpa-install-all ()
   (interactive)
@@ -189,10 +190,11 @@
            (looking-at   "}"))
       (progn
         (newline-and-indent)
+        (indent-for-tab-command)
         (previous-line)
         (move-end-of-line nil)))
   (newline-and-indent))
-(add-hook 'c-mode-hook (lambda () (local-set-key (kbd "RET") 'additional-newline)))
+;(add-hook 'c-mode-hook (lambda () (local-set-key (kbd "RET") 'additional-newline)))
 
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
@@ -278,3 +280,5 @@
     map))
 
 (add-hook 'php-mode 'ggtags-mode)
+
+(evil-mode t)
