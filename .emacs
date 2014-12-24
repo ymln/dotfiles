@@ -47,6 +47,7 @@
  '(recentf-max-saved-items 1000000)
  '(recentf-mode t)
  '(save-place t nil (saveplace))
+ '(scheme-program-name "csi -:c")
  '(scroll-conservatively 100000)
  '(scroll-step 1)
  '(show-paren-mode t)
@@ -163,6 +164,7 @@
                  (gnu-apl-mode :fetcher github :repo "lokedhs/gnu-apl-mode")
                  (mingus :fetcher github :repo "pft/mingus")
                  (syntax-subword :fetcher hg :url "https://bitbucket.org/jpkotta/syntax-subword")
+                 (autotetris-mode :fetcher github :repo "skeeto/autotetris-mode")
                  skype key-chord w3m jump-char xml-rpc jira ace-jump-mode ag helm-ag
                  multiple-cursors wrap-region expand-region helm-swoop helm-projectile
                  projectile helm yasnippet flycheck eproject twig-mode gnu-apl-mode s
