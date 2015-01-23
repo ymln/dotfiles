@@ -19,6 +19,7 @@ nmap K gT
 set defsearch=ddg
 set editor=EDITOR
 set suggestengines=
+set gui=none,tabs
 source! /home/my/.vimperatorrc.local
 
 " vim: set ft=vimperator:
