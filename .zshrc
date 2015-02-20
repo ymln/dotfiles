@@ -54,6 +54,7 @@ alias gd="git describe --tags"
 alias ls="ls --group-directories-first --color=auto"
 alias sl=ls
 alias m="fasd -e mpv"
+alias ytdl=youtube-dl
 
 function e {
   $EDITOR $@ &> /dev/null &!
@@ -122,6 +123,10 @@ select-word-style bash
 
 # Shift-tab
 bindkey '^[[Z' reverse-menu-complete
+
+source ~/bin/deer
+zle -N deer-launch
+bindkey '\ek' deer-launch
 
 if [ -f ~/local.sh ]; then
    . ~/local.sh
