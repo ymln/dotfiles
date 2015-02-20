@@ -122,6 +122,10 @@ select-word-style bash
 # Shift-tab
 bindkey '^[[Z' reverse-menu-complete
 
+source ~/bin/deer
+zle -N deer-launch
+bindkey '\ek' deer-launch
+
 if [ -f ~/local.sh ]; then
    . ~/local.sh
 fi

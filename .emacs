@@ -35,7 +35,7 @@
  '(helm-mode t)
  '(helm-quick-update t)
  '(helm-truncate-lines t)
- '(highlight-symbol-idle-delay 0)
+ '(highlight-symbol-idle-delay 0.1)
  '(hippie-expand-try-functions-list (quote (yas-hippie-try-expand try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-expand-line try-expand-line-all-buffers try-expand-list try-complete-lisp-symbol-partially try-complete-lisp-symbol)))
  '(horizontal-scroll-bar-mode nil)
  '(ido-enable-flex-matching t)
