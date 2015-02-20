@@ -14,7 +14,7 @@
  '(browse-url-new-window-flag t)
  '(column-number-mode t)
  '(custom-enabled-themes (quote (zenburn)))
- '(custom-safe-themes (quote ("a7328f552001f136cb5364dab72c58cf92cf6ccb9529c68e1e14cf73e92e0768" "5ba11ea18c2ebed659a8d5dac66675a44015979444f88cb4b577983f5190fd8e" "dd4db38519d2ad7eb9e2f30bc03fba61a7af49a185edfd44e020aa5345e3dca7" default)))
+ '(custom-safe-themes (quote ("77df73cdeddc0405d6bfeb2aa59858a62749613535e268943f76969e73557ffe" "a7328f552001f136cb5364dab72c58cf92cf6ccb9529c68e1e14cf73e92e0768" "5ba11ea18c2ebed659a8d5dac66675a44015979444f88cb4b577983f5190fd8e" "dd4db38519d2ad7eb9e2f30bc03fba61a7af49a185edfd44e020aa5345e3dca7" default)))
  '(desktop-save-mode t)
  '(dtrt-indent-mode t nil (dtrt-indent))
  '(dtrt-indent-require-confirmation-flag nil)
@@ -107,7 +107,6 @@
 (add-hook 'gnu-apl-mode-hook (lambda () (set-input-method "APL-Z")))
 (add-hook 'gnu-apl-interactive-mode-hook (lambda () (set-input-method "APL-Z")))
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
-(add-hook 'after-init-hook #'global-flycheck-mode)
 (add-hook 'sgml-mode-hook (lambda ()
                             (set (make-local-variable 'sgml-basic-offset) 4)
                             (sgml-guess-indent)))
@@ -259,9 +258,7 @@
 
 (key-chord-define-global "df" 'ace-jump-char-mode)
 
-; temporary fix for https://github.com/lewang/ws-butler/issues/4
-(unless (daemonp)
-    (ws-butler-global-mode t))
+(ws-butler-global-mode t)
 
 (setq frame-title-format '(:eval (if buffer-file-name "%f" "%b")))
 
