@@ -53,6 +53,7 @@ alias gd="git describe --tags"
 alias ls="ls --group-directories-first --color=auto"
 alias sl=ls
 alias m="fasd -e mpv"
+alias ytdl=youtube-dl
 
 function e {
   $EDITOR $@ &> /dev/null &!

@@ -3,7 +3,7 @@
   (with-temp-buffer
     (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
     (eval-buffer)))
-(load "local" t)
+(load "~/local" t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -43,6 +43,7 @@
  '(inhibit-startup-screen t)
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(menu-bar-mode nil)
+ '(mode-require-final-newline nil)
  '(org-agenda-files (quote ("~/todo.org")))
  '(package-archives (quote (("gnu" . "http://elpa.gnu.org/packages/") ("marmalade" . "http://marmalade-repo.org/packages/"))))
  '(projectile-global-mode t)
@@ -270,6 +271,8 @@
 
 ;(global-set-key (kbd "M-f") 'viper-forward-word)
 ;(global-set-key (kbd "M-b") 'viper-backward-word)
+
+(global-set-key (kbd "M-g m") 'make-frame)
 
 (add-to-list 'color-identifiers:modes-alist
              '(php-mode "[[:space:]]*" "\\([a-zA-Z_$]\\(?:\\s_\\|\\sw\\)*\\)"
