@@ -55,6 +55,7 @@ alias ls="ls --group-directories-first --color=auto"
 alias sl=ls
 alias m="fasd -e mpv"
 alias ytdl=youtube-dl
+alias l='ls | grep -ia'
 
 function e {
   $EDITOR $@ &> /dev/null &!
