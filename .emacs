@@ -14,9 +14,7 @@
  '(browse-url-new-window-flag t)
  '(column-number-mode t)
  '(custom-enabled-themes (quote (zenburn)))
- '(custom-safe-themes
-   (quote
-    ("a7328f552001f136cb5364dab72c58cf92cf6ccb9529c68e1e14cf73e92e0768" "5ba11ea18c2ebed659a8d5dac66675a44015979444f88cb4b577983f5190fd8e" "dd4db38519d2ad7eb9e2f30bc03fba61a7af49a185edfd44e020aa5345e3dca7" default)))
+ '(custom-safe-themes (quote ("77df73cdeddc0405d6bfeb2aa59858a62749613535e268943f76969e73557ffe" "a7328f552001f136cb5364dab72c58cf92cf6ccb9529c68e1e14cf73e92e0768" "5ba11ea18c2ebed659a8d5dac66675a44015979444f88cb4b577983f5190fd8e" "dd4db38519d2ad7eb9e2f30bc03fba61a7af49a185edfd44e020aa5345e3dca7" default)))
  '(desktop-save-mode t)
  '(dtrt-indent-mode t nil (dtrt-indent))
  '(dtrt-indent-require-confirmation-flag nil)
@@ -48,10 +46,7 @@
  '(mode-require-final-newline nil)
  '(org-agenda-files (quote ("~/todo.org")))
  '(org-use-speed-commands t)
- '(package-archives
-   (quote
-    (("gnu" . "http://elpa.gnu.org/packages/")
-     ("marmalade" . "http://marmalade-repo.org/packages/"))))
+ '(package-archives (quote (("gnu" . "http://elpa.gnu.org/packages/") ("marmalade" . "http://marmalade-repo.org/packages/"))))
  '(projectile-global-mode t)
  '(projectile-switch-project-action (quote (lambda nil (dired "."))))
  '(quelpa-persistent-cache-file "~/.quelpa-cache")
@@ -104,7 +99,6 @@
 (require 'key-chord)
 (require 'uniquify)
 (require 'helm-ag)
-(require 'viper)
 
 (key-chord-mode 1)
 
@@ -272,14 +266,7 @@
 
 (setq-default cursor-type 'bar)
 
-;(global-set-key (kbd "M-f") 'viper-forward-word)
-;(global-set-key (kbd "M-b") 'viper-backward-word)
-
 (global-set-key (kbd "M-g m") 'make-frame)
-
-(add-to-list 'color-identifiers:modes-alist
-             '(php-mode "[[:space:]]*" "\\([a-zA-Z_$]\\(?:\\s_\\|\\sw\\)*\\)"
-                       (nil font-lock-variable-name-face font-lock-function-name-face font-lock-constant-face font-lock-type-face default)))
 
 (setq ggtags-navigation-map
   (let ((map (make-sparse-keymap)))
