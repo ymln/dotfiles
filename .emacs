@@ -99,7 +99,6 @@
 (require 'key-chord)
 (require 'uniquify)
 (require 'helm-ag)
-(require 'viper)
 
 (key-chord-mode 1)
 
@@ -267,14 +266,7 @@
 
 (setq-default cursor-type 'bar)
 
-;(global-set-key (kbd "M-f") 'viper-forward-word)
-;(global-set-key (kbd "M-b") 'viper-backward-word)
-
 (global-set-key (kbd "M-g m") 'make-frame)
-
-(add-to-list 'color-identifiers:modes-alist
-             '(php-mode "[[:space:]]*" "\\([a-zA-Z_$]\\(?:\\s_\\|\\sw\\)*\\)"
-                       (nil font-lock-variable-name-face font-lock-function-name-face font-lock-constant-face font-lock-type-face default)))
 
 (setq ggtags-navigation-map
   (let ((map (make-sparse-keymap)))
