@@ -56,6 +56,7 @@ alias sl=ls
 alias m="fasd -e mpv"
 alias ytdl=youtube-dl
 alias l='ls -a | grep -ia'
+alias ,='cd ~/,'
 
 function e {
   $EDITOR $@ &> /dev/null &!
