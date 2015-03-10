@@ -27,6 +27,7 @@
  '(flx-ido-threshhold 100)
  '(global-auto-revert-mode t)
  '(global-color-identifiers-mode nil)
+ '(global-company-mode t)
  '(global-evil-surround-mode t)
  '(global-rainbow-delimiters-mode t)
  '(global-syntax-subword-mode t)
