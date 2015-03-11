@@ -41,6 +41,7 @@
  '(ido-everywhere t)
  '(ido-mode (quote both) nil (ido))
  '(ido-ubiquitous-mode t)
+ '(ido-vertical-mode t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
@@ -54,7 +55,7 @@
      ("marmalade" . "http://marmalade-repo.org/packages/"))))
  '(package-selected-packages
    (quote
-    (helm projectile ido-ubiquitous flx-ido wgrep-ack zenburn-theme yasnippet yaml-mode xml-rpc ws-butler wrap-region web-mode w3m twig-mode ttrss syntax-subword smex slime skype rainbow-delimiters quelpa php-mode php+-mode paredit pabbrev org-jira multiple-cursors mew magit lua-mode key-chord jump-char jira highlight-symbol gnu-apl-mode ggtags flycheck find-file-in-project find-file-in-git-repo f expand-region evil-surround evil dtrt-indent color-theme-solarized color-identifiers-mode coffee-mode clojure-test-mode clojure-project-mode chicken-scheme autotetris-mode auto-complete anything-match-plugin anything-git-grep anything-config ag ace-jump-mode)))
+    (ido-vertical-mode helm projectile ido-ubiquitous flx-ido wgrep-ack zenburn-theme yasnippet yaml-mode xml-rpc ws-butler wrap-region web-mode w3m twig-mode ttrss syntax-subword smex slime skype rainbow-delimiters quelpa php-mode php+-mode paredit pabbrev org-jira multiple-cursors mew magit lua-mode key-chord jump-char jira highlight-symbol gnu-apl-mode ggtags flycheck find-file-in-project find-file-in-git-repo f expand-region evil-surround evil dtrt-indent color-theme-solarized color-identifiers-mode coffee-mode clojure-test-mode clojure-project-mode chicken-scheme autotetris-mode auto-complete anything-match-plugin anything-git-grep anything-config ag ace-jump-mode)))
  '(projectile-enable-caching t)
  '(projectile-global-mode t)
  '(projectile-switch-project-action (quote (lambda nil (dired "."))))
@@ -155,7 +156,8 @@
 
 (global-set-key (kbd "C-x f") 'projectile-find-file)
 
-(global-set-key (kbd "M-/") 'hippie-expand)
+(global-set-key (kbd "M-/") 'company-complete)
+(define-key company-active-map (kbd "M-/") 'company-select-next)
 
 (global-set-key (kbd "C-=") 'er/expand-region)
 
@@ -262,5 +264,7 @@
 (setq web-mode-engines-alist '(("php" . "\\.tpl\\'")))
 
 (add-to-list 'auto-mode-alist '("\\.tpl\\'" . web-mode))
+
+(add-hook 'minibuffer-setup-hook (lambda () (setq-local show-trailing-whitespace nil)))
 
 (evil-mode t)
