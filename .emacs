@@ -176,7 +176,7 @@
                  (mingus :fetcher github :repo "pft/mingus")
                  (syntax-subword :fetcher hg :url "https://bitbucket.org/jpkotta/syntax-subword")
                  (autotetris-mode :fetcher github :repo "skeeto/autotetris-mode")
-                 skype key-chord w3m jump-char xml-rpc jira ace-jump-mode ag
+                 skype key-chord w3m jump-char xml-rpc jira ace-jump-mode ag company
                  multiple-cursors wrap-region expand-region flx-ido smex ido-ubiquitous
                  projectile yasnippet flycheck eproject twig-mode gnu-apl-mode s
                  coffee-mode find-file-in-project find-file-in-git-repo rainbow-delimiters
