@@ -28,6 +28,7 @@
  '(global-auto-revert-mode t)
  '(global-color-identifiers-mode nil)
  '(global-company-mode t)
+ '(global-evil-matchit-mode t)
  '(global-evil-surround-mode t)
  '(global-rainbow-delimiters-mode t)
  '(global-syntax-subword-mode t)
@@ -55,7 +56,7 @@
      ("marmalade" . "http://marmalade-repo.org/packages/"))))
  '(package-selected-packages
    (quote
-    (ido-vertical-mode helm projectile ido-ubiquitous flx-ido wgrep-ack zenburn-theme yasnippet yaml-mode xml-rpc ws-butler wrap-region web-mode w3m twig-mode ttrss syntax-subword smex slime skype rainbow-delimiters quelpa php-mode php+-mode paredit pabbrev org-jira multiple-cursors mew magit lua-mode key-chord jump-char jira highlight-symbol gnu-apl-mode ggtags flycheck find-file-in-project find-file-in-git-repo f expand-region evil-surround evil dtrt-indent color-theme-solarized color-identifiers-mode coffee-mode clojure-test-mode clojure-project-mode chicken-scheme autotetris-mode auto-complete anything-match-plugin anything-git-grep anything-config ag ace-jump-mode)))
+    (evil-exchange apache-mode ido-vertical-mode helm projectile ido-ubiquitous flx-ido wgrep-ack zenburn-theme yasnippet yaml-mode xml-rpc ws-butler wrap-region web-mode w3m twig-mode ttrss syntax-subword smex slime skype rainbow-delimiters quelpa php-mode php+-mode paredit pabbrev org-jira multiple-cursors mew magit lua-mode key-chord jump-char jira highlight-symbol gnu-apl-mode ggtags flycheck find-file-in-project find-file-in-git-repo f expand-region evil-surround evil dtrt-indent color-theme-solarized color-identifiers-mode coffee-mode clojure-test-mode clojure-project-mode chicken-scheme autotetris-mode auto-complete anything-match-plugin anything-git-grep anything-config ag ace-jump-mode)))
  '(projectile-enable-caching t)
  '(projectile-global-mode t)
  '(projectile-switch-project-action (quote (lambda nil (dired "."))))
@@ -105,6 +106,7 @@
 (require 'ws-butler)
 (require 'key-chord)
 (require 'uniquify)
+(require 'evil-exchange)
 
 (key-chord-mode 1)
 
@@ -147,6 +149,12 @@
 (global-set-key (kbd "C-c l") 'windmove-right)
 (global-set-key (kbd "C-c k")    'windmove-up)
 (global-set-key (kbd "C-c j")  'windmove-down)
+(global-set-key (kbd "M-h")  'windmove-left)
+(global-set-key (kbd "M-l") 'windmove-right)
+(global-set-key (kbd "M-k")    'windmove-up)
+(global-set-key (kbd "M-j")  'windmove-down)
+(define-key c-mode-map (kbd "M-j") nil)
+(global-set-key (kbd "M-1") 'delete-other-windows)
 
 (require 'smex)
 (smex-initialize)
@@ -184,7 +192,8 @@
                  projectile yasnippet flycheck eproject twig-mode gnu-apl-mode s
                  coffee-mode find-file-in-project find-file-in-git-repo rainbow-delimiters
                  zenburn-theme php-mode paredit highlight-symbol cider yaml-mode
-                 ws-butler magit color-identifiers-mode evil ggtags web-mode evil-surround))
+                 ws-butler magit color-identifiers-mode evil ggtags web-mode evil-surround
+                 evil-matchit apache-mode evil-exchange))
 
 (defun quelpa-install-all ()
   (interactive)
@@ -268,3 +277,7 @@
 (add-hook 'minibuffer-setup-hook (lambda () (setq-local show-trailing-whitespace nil)))
 
 (evil-mode t)
+
+(evil-exchange-install)
+
+(global-set-key (kbd "<f4>") 'other-window)
