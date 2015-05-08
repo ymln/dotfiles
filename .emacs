@@ -12,6 +12,7 @@
  ;; If there is more than one, they won't work right.
  '(browse-url-browser-function (quote w3m-browse-url))
  '(browse-url-new-window-flag t)
+ '(cider-repl-use-pretty-printing t)
  '(column-number-mode t)
  '(custom-enabled-themes (quote (zenburn)))
  '(custom-safe-themes
