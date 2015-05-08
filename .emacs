@@ -33,15 +33,20 @@
  '(global-rainbow-delimiters-mode t)
  '(global-syntax-subword-mode t)
  '(gnu-apl-executable "myapl")
+ '(helm-buffer-details-flag nil)
+ '(helm-buffers-fuzzy-matching t)
+ '(helm-google-search-function (quote helm-google-api-search))
+ '(helm-google-suggest-use-curl-p nil)
+ '(helm-match-plugin-mode t nil (helm-match-plugin))
+ '(helm-mode t)
+ '(helm-quick-update t)
+ '(helm-truncate-lines t)
  '(highlight-symbol-idle-delay 0.1)
  '(hippie-expand-try-functions-list
    (quote
     (yas-hippie-try-expand try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-expand-line try-expand-line-all-buffers try-expand-list try-complete-lisp-symbol-partially try-complete-lisp-symbol)))
  '(horizontal-scroll-bar-mode nil)
  '(ido-enable-flex-matching t)
- '(ido-everywhere t)
- '(ido-mode (quote both) nil (ido))
- '(ido-ubiquitous-mode t)
  '(ido-vertical-mode t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
@@ -56,7 +61,8 @@
      ("marmalade" . "http://marmalade-repo.org/packages/"))))
  '(package-selected-packages
    (quote
-    (evil-exchange apache-mode ido-vertical-mode helm projectile ido-ubiquitous flx-ido wgrep-ack zenburn-theme yasnippet yaml-mode xml-rpc ws-butler wrap-region web-mode w3m twig-mode ttrss syntax-subword smex slime skype rainbow-delimiters quelpa php-mode php+-mode paredit pabbrev org-jira multiple-cursors mew magit lua-mode key-chord jump-char jira highlight-symbol gnu-apl-mode ggtags flycheck find-file-in-project find-file-in-git-repo f expand-region evil-surround evil dtrt-indent color-theme-solarized color-identifiers-mode coffee-mode clojure-test-mode clojure-project-mode chicken-scheme autotetris-mode auto-complete anything-match-plugin anything-git-grep anything-config ag ace-jump-mode)))
+    (helm-swoop helm-ag helm-projectile evil-exchange apache-mode ido-vertical-mode helm projectile flx-ido wgrep-ack zenburn-theme yasnippet yaml-mode xml-rpc ws-butler wrap-region web-mode w3m twig-mode ttrss syntax-subword smex slime skype rainbow-delimiters quelpa php-mode php+-mode paredit pabbrev org-jira multiple-cursors mew magit lua-mode key-chord jump-char jira highlight-symbol gnu-apl-mode ggtags flycheck find-file-in-project find-file-in-git-repo f expand-region evil-surround evil dtrt-indent color-theme-solarized color-identifiers-mode coffee-mode clojure-test-mode clojure-project-mode chicken-scheme autotetris-mode auto-complete anything-match-plugin anything-git-grep anything-config ag ace-jump-mode)))
+ '(projectile-completion-system (quote helm))
  '(projectile-enable-caching t)
  '(projectile-global-mode t)
  '(projectile-switch-project-action (quote (lambda nil (dired "."))))
@@ -107,6 +113,10 @@
 (require 'key-chord)
 (require 'uniquify)
 (require 'evil-exchange)
+(require 'helm-config)
+(require 'helm-projectile)
+(require 'helm-swoop)
+(require 'helm-ag)
 
 (key-chord-mode 1)
 
@@ -156,13 +166,11 @@
 (define-key c-mode-map (kbd "M-j") nil)
 (global-set-key (kbd "M-1") 'delete-other-windows)
 
-(require 'smex)
-(smex-initialize)
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
-
-(global-set-key (kbd "C-x f") 'projectile-find-file)
+(global-set-key (kbd "C-x f") 'helm-projectile)
+(global-set-key (kbd "C-x C-r") 'helm-recentf)
+(global-set-key (kbd "C-x C-b") 'helm-mini)
+(global-set-key (kbd "M-s o") 'helm-occur)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
 
 (global-set-key (kbd "M-/") 'company-complete)
 (define-key company-active-map (kbd "M-/") 'company-select-next)
@@ -188,12 +196,12 @@
                  (syntax-subword :fetcher hg :url "https://bitbucket.org/jpkotta/syntax-subword")
                  (autotetris-mode :fetcher github :repo "skeeto/autotetris-mode")
                  skype key-chord w3m jump-char xml-rpc jira ace-jump-mode ag company
-                 multiple-cursors wrap-region expand-region flx-ido smex ido-ubiquitous
+                 multiple-cursors wrap-region expand-region flx-ido smex
                  projectile yasnippet flycheck eproject twig-mode gnu-apl-mode s
                  coffee-mode find-file-in-project find-file-in-git-repo rainbow-delimiters
                  zenburn-theme php-mode paredit highlight-symbol cider yaml-mode
                  ws-butler magit color-identifiers-mode evil ggtags web-mode evil-surround
-                 evil-matchit apache-mode evil-exchange))
+                 evil-matchit apache-mode evil-exchange helm helm-projectile helm-ag helm-swoop))
 
 (defun quelpa-install-all ()
   (interactive)
@@ -225,8 +233,28 @@
 (defun do-ag-in-root (string)
   (interactive (list (read-from-minibuffer "Search string: " (ag/dwim-at-point))))
   (do-in-root '(lambda (root) (ag/search string root))))
+(defun helm-do-ag-in-root ()
+  (interactive)
+  (do-in-root 'helm-do-ag))
+
+; Overriden function to make ag ignore case
+(defun helm-ag--do-ag-candidate-process ()
+ (let* ((default-directory (or helm-ag-default-directory default-directory))
+        (proc (start-process "helm-do-ag" nil
+                             "ag" "-i" "--nocolor" "--nogroup" "--" helm-pattern)))
+    (prog1 proc
+      (set-process-sentinel
+       proc
+       (lambda (process event)
+         (helm-process-deferred-sentinel-hook
+          process event (helm-default-directory))
+         (when (string= event "finished\n")
+           (helm-ag--do-ag-propertize)))))))
 
 (global-set-key (kbd "C-c C-a") 'do-ag-in-root)
+(global-set-key (kbd "C-c a") 'helm-do-ag-in-root)
+(global-set-key (kbd "C-c r") 'helm-resume)
+(global-set-key (kbd "M-i") 'helm-imenu)
 
 (global-set-key (kbd "C-c SPC") 'ace-jump-char-mode)
 
