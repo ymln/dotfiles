@@ -17,7 +17,7 @@
  '(custom-enabled-themes (quote (zenburn)))
  '(custom-safe-themes
    (quote
-    ("77df73cdeddc0405d6bfeb2aa59858a62749613535e268943f76969e73557ffe" "a7328f552001f136cb5364dab72c58cf92cf6ccb9529c68e1e14cf73e92e0768" "5ba11ea18c2ebed659a8d5dac66675a44015979444f88cb4b577983f5190fd8e" "dd4db38519d2ad7eb9e2f30bc03fba61a7af49a185edfd44e020aa5345e3dca7" default)))
+    ("da7fa7211dd96fcf77398451e3f43052558f01b20eb8bee9ac0fd88627e11e22" "77df73cdeddc0405d6bfeb2aa59858a62749613535e268943f76969e73557ffe" "a7328f552001f136cb5364dab72c58cf92cf6ccb9529c68e1e14cf73e92e0768" "5ba11ea18c2ebed659a8d5dac66675a44015979444f88cb4b577983f5190fd8e" "dd4db38519d2ad7eb9e2f30bc03fba61a7af49a185edfd44e020aa5345e3dca7" default)))
  '(desktop-save-mode t)
  '(dtrt-indent-mode t nil (dtrt-indent))
  '(dtrt-indent-require-confirmation-flag nil)
@@ -59,7 +59,8 @@
  '(package-archives
    (quote
     (("gnu" . "http://elpa.gnu.org/packages/")
-     ("marmalade" . "http://marmalade-repo.org/packages/"))))
+     ("marmalade" . "http://marmalade-repo.org/packages/")
+     ("melpa" . "http://melpa.org/packages/"))))
  '(package-selected-packages
    (quote
     (helm-swoop helm-ag helm-projectile evil-exchange apache-mode ido-vertical-mode helm projectile flx-ido wgrep-ack zenburn-theme yasnippet yaml-mode xml-rpc ws-butler wrap-region web-mode w3m twig-mode ttrss syntax-subword smex slime skype rainbow-delimiters quelpa php-mode php+-mode paredit pabbrev org-jira multiple-cursors mew magit lua-mode key-chord jump-char jira highlight-symbol gnu-apl-mode ggtags flycheck find-file-in-project find-file-in-git-repo f expand-region evil-surround evil dtrt-indent color-theme-solarized color-identifiers-mode coffee-mode clojure-test-mode clojure-project-mode chicken-scheme autotetris-mode auto-complete anything-match-plugin anything-git-grep anything-config ag ace-jump-mode)))
@@ -237,20 +238,6 @@
 (defun helm-do-ag-in-root ()
   (interactive)
   (do-in-root 'helm-do-ag))
-
-; Overriden function to make ag ignore case
-(defun helm-ag--do-ag-candidate-process ()
- (let* ((default-directory (or helm-ag-default-directory default-directory))
-        (proc (start-process "helm-do-ag" nil
-                             "ag" "-i" "--nocolor" "--nogroup" "--" helm-pattern)))
-    (prog1 proc
-      (set-process-sentinel
-       proc
-       (lambda (process event)
-         (helm-process-deferred-sentinel-hook
-          process event (helm-default-directory))
-         (when (string= event "finished\n")
-           (helm-ag--do-ag-propertize)))))))
 
 (global-set-key (kbd "C-c C-a") 'do-ag-in-root)
 (global-set-key (kbd "C-c a") 'helm-do-ag-in-root)
