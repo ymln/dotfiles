@@ -16,7 +16,7 @@ nmap , gT
 nmap . gt
 nmap J gt
 nmap K gT
-set defsearch=ddg
+set defsearch=g
 set editor=EDITOR
 set suggestengines=
 set gui=none,tabs

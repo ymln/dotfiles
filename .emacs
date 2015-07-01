@@ -17,7 +17,7 @@
  '(custom-enabled-themes (quote (zenburn)))
  '(custom-safe-themes
    (quote
-    ("da7fa7211dd96fcf77398451e3f43052558f01b20eb8bee9ac0fd88627e11e22" "77df73cdeddc0405d6bfeb2aa59858a62749613535e268943f76969e73557ffe" "a7328f552001f136cb5364dab72c58cf92cf6ccb9529c68e1e14cf73e92e0768" "5ba11ea18c2ebed659a8d5dac66675a44015979444f88cb4b577983f5190fd8e" "dd4db38519d2ad7eb9e2f30bc03fba61a7af49a185edfd44e020aa5345e3dca7" default)))
+    ("3dafeadb813a33031848dfebfa0928e37e7a3c18efefa10f3e9f48d1993598d3" "da7fa7211dd96fcf77398451e3f43052558f01b20eb8bee9ac0fd88627e11e22" "77df73cdeddc0405d6bfeb2aa59858a62749613535e268943f76969e73557ffe" "a7328f552001f136cb5364dab72c58cf92cf6ccb9529c68e1e14cf73e92e0768" "5ba11ea18c2ebed659a8d5dac66675a44015979444f88cb4b577983f5190fd8e" "dd4db38519d2ad7eb9e2f30bc03fba61a7af49a185edfd44e020aa5345e3dca7" default)))
  '(desktop-save-mode t)
  '(dtrt-indent-mode t nil (dtrt-indent))
  '(dtrt-indent-require-confirmation-flag nil)
@@ -41,7 +41,7 @@
  '(helm-match-plugin-mode t nil (helm-match-plugin))
  '(helm-mode t)
  '(helm-quick-update t)
- '(helm-truncate-lines t)
+ '(helm-truncate-lines t t)
  '(highlight-symbol-idle-delay 0.1)
  '(hippie-expand-try-functions-list
    (quote
@@ -51,6 +51,7 @@
  '(ido-vertical-mode t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
+ '(magit-auto-revert-mode nil)
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(menu-bar-mode nil)
  '(mode-require-final-newline nil)
@@ -59,11 +60,10 @@
  '(package-archives
    (quote
     (("gnu" . "http://elpa.gnu.org/packages/")
-     ("marmalade" . "http://marmalade-repo.org/packages/")
      ("melpa" . "http://melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (helm-swoop helm-ag helm-projectile evil-exchange apache-mode ido-vertical-mode helm projectile flx-ido wgrep-ack zenburn-theme yasnippet yaml-mode xml-rpc ws-butler wrap-region web-mode w3m twig-mode ttrss syntax-subword smex slime skype rainbow-delimiters quelpa php-mode php+-mode paredit pabbrev org-jira multiple-cursors mew magit lua-mode key-chord jump-char jira highlight-symbol gnu-apl-mode ggtags flycheck find-file-in-project find-file-in-git-repo f expand-region evil-surround evil dtrt-indent color-theme-solarized color-identifiers-mode coffee-mode clojure-test-mode clojure-project-mode chicken-scheme autotetris-mode auto-complete anything-match-plugin anything-git-grep anything-config ag ace-jump-mode)))
+    (company helm-swoop helm-ag helm-projectile evil-exchange apache-mode ido-vertical-mode helm projectile flx-ido wgrep-ack zenburn-theme yasnippet yaml-mode xml-rpc ws-butler wrap-region web-mode w3m twig-mode ttrss syntax-subword smex slime skype rainbow-delimiters quelpa php-mode php+-mode paredit pabbrev org-jira multiple-cursors mew magit lua-mode key-chord jump-char jira highlight-symbol gnu-apl-mode ggtags flycheck find-file-in-project find-file-in-git-repo f expand-region evil-surround evil dtrt-indent color-theme-solarized color-identifiers-mode coffee-mode clojure-test-mode clojure-project-mode chicken-scheme autotetris-mode auto-complete anything-match-plugin anything-git-grep anything-config ag ace-jump-mode)))
  '(projectile-completion-system (quote helm))
  '(projectile-enable-caching t)
  '(projectile-global-mode t)
@@ -91,6 +91,7 @@
  '(ws-butler-keep-whitespace-before-point nil)
  '(yas-global-mode t nil (yasnippet))
  '(yas-snippet-dirs (quote ("~/.emacs.d/snippets")) nil (yasnippet)))
+(setq magit-last-seen-setup-instructions "1.4.0")
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -136,7 +137,6 @@
       (list (lambda (endp delimiter)
               (if (memq major-mode '(php-mode twig-mode c++-mode python-mode js-mode)) nil t))))
 
-(add-hook 'prog-mode-hook 'highlight-symbol-mode)
 (add-hook 'prog-mode-hook 'paredit-mode)
 
 (add-hook 'w3m-mode-hook (lambda ()
