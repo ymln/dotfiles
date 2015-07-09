@@ -297,3 +297,6 @@
 (evil-exchange-install)
 
 (global-set-key (kbd "<f4>") 'other-window)
+
+(global-set-key (kbd "M-H") 'previous-buffer)
+(global-set-key (kbd "M-L") 'next-buffer)
