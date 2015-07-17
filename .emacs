@@ -306,3 +306,5 @@
   (kill-new (buffer-file-name)))
 
 (global-set-key (kbd "M-C") 'copy-buffer-file-name)
+
+(global-set-key (kbd "M-g e") 'eshell)
