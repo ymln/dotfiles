@@ -12,7 +12,7 @@
  ;; If there is more than one, they won't work right.
  '(browse-url-browser-function (quote w3m-browse-url))
  '(browse-url-new-window-flag t)
- '(cider-repl-use-pretty-printing nil)
+ '(cider-repl-use-pretty-printing t)
  '(column-number-mode t)
  '(custom-enabled-themes (quote (zenburn)))
  '(custom-safe-themes
@@ -63,7 +63,7 @@
      ("melpa" . "http://melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (company helm-swoop helm-ag helm-projectile evil-exchange apache-mode ido-vertical-mode helm projectile flx-ido wgrep-ack zenburn-theme yasnippet yaml-mode xml-rpc ws-butler wrap-region web-mode w3m twig-mode ttrss syntax-subword smex slime skype rainbow-delimiters quelpa php-mode php+-mode paredit pabbrev org-jira multiple-cursors mew magit lua-mode key-chord jump-char jira highlight-symbol gnu-apl-mode ggtags flycheck find-file-in-project find-file-in-git-repo f expand-region evil-surround evil dtrt-indent color-theme-solarized color-identifiers-mode coffee-mode clojure-test-mode clojure-project-mode chicken-scheme autotetris-mode auto-complete anything-match-plugin anything-git-grep anything-config ag ace-jump-mode)))
+    (evil-ranger company helm-swoop helm-ag helm-projectile evil-exchange apache-mode ido-vertical-mode helm projectile flx-ido wgrep-ack zenburn-theme yasnippet yaml-mode xml-rpc ws-butler wrap-region web-mode w3m twig-mode ttrss syntax-subword smex slime skype rainbow-delimiters quelpa php-mode php+-mode paredit pabbrev org-jira multiple-cursors mew magit lua-mode key-chord jump-char jira highlight-symbol gnu-apl-mode ggtags flycheck find-file-in-project find-file-in-git-repo f expand-region evil-surround evil dtrt-indent color-theme-solarized color-identifiers-mode coffee-mode clojure-test-mode clojure-project-mode chicken-scheme autotetris-mode auto-complete anything-match-plugin anything-git-grep anything-config ag ace-jump-mode)))
  '(projectile-completion-system (quote helm))
  '(projectile-enable-caching t)
  '(projectile-global-mode t)
@@ -300,3 +300,9 @@
 
 (global-set-key (kbd "M-H") 'previous-buffer)
 (global-set-key (kbd "M-L") 'next-buffer)
+
+(defun copy-buffer-file-name ()
+  (interactive)
+  (kill-new (buffer-file-name)))
+
+(global-set-key (kbd "M-C") 'copy-buffer-file-name)
