@@ -18,28 +18,33 @@ runtime! debian.vim
 "{{{ Vundles
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-Bundle 'gmarik/vundle'
-Bundle 'L9'
-Bundle 'scrooloose/syntastic'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'matchit.zip'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-fugitive'
-Bundle 'majutsushi/tagbar'
-"Bundle 'Vimacs'
-Bundle 'ciaranm/detectindent'
-Bundle 'kien/ctrlp.vim'
-Bundle 'desert256.vim'
-Bundle 'joonty/vim-xdebug.git'
-Bundle 'ShowTrailingWhitespace'
-Bundle 'slimv.vim'
-Bundle 'evidens/vim-twig'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'groenewege/vim-less'
-Bundle 'snipMate'
-Bundle 'nielsmadan/harlequin'
-Bundle 'arnaud-lb/vim-php-namespace'
+Plugin 'gmarik/vundle'
+Plugin 'L9'
+Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'matchit.zip'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-fugitive'
+Plugin 'majutsushi/tagbar'
+"Plugin 'Vimacs'
+Plugin 'ciaranm/detectindent'
+Plugin 'kien/ctrlp.vim'
+Plugin 'desert256.vim'
+Plugin 'joonty/vim-xdebug.git'
+Plugin 'ShowTrailingWhitespace'
+Plugin 'slimv.vim'
+Plugin 'evidens/vim-twig'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'groenewege/vim-less'
+Plugin 'snipMate'
+Plugin 'nielsmadan/harlequin'
+Plugin 'arnaud-lb/vim-php-namespace'
+Plugin 'rking/ag.vim'
+Plugin 'maxbrunsfeld/vim-yankstack'
+Plugin 'tpope/vim-abolish'
+Plugin 'bling/vim-airline'
+Plugin 'altercation/vim-colors-solarized'
 
 filetype plugin indent on
 "}}}
@@ -89,7 +94,7 @@ set tags+=./tags.vendor;/$HOME
 " set spell
 
 set background=dark
-colorscheme desert
+colorscheme solarized
 
 set expandtab
 set tabstop=4
@@ -154,3 +159,48 @@ imap  
 set copyindent
 
 noremap <Leader>u :call PhpInsertUse()<CR>
+
+map gs :Gstatus<CR>
+
+set previewheight=30
+
+map gc c
+
+if has("neovim")
+  tnoremap <A-h> <C-\><C-n><C-w>h
+  tnoremap <A-j> <C-\><C-n><C-w>j
+  tnoremap <A-k> <C-\><C-n><C-w>k
+  tnoremap <A-l> <C-\><C-n><C-w>l
+endif
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
+
+map g1 :only<CR>
+
+let g:syntastic_php_checkers = ["php"]
+
+imap <A-/> <C-n>
+
+nmap <Space>s :w<CR>
+nmap <Space>n :noh<CR>
+nmap <A-x> :
+nmap <Space>c :Git diff --cached<CR>
+nmap <Space>C :Gcommit<CR>
+nmap <Space>l :tabnew term://tig<CR>i
+
+nmap <Space>t :tabnew<CR>
+
+function! Preserve(command)
+  let w = winsaveview()
+  execute a:command
+  call winrestview(w)
+endfunction
+
+set laststatus=2
+
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'

@@ -32,6 +32,7 @@
  '(global-company-mode t)
  '(global-evil-matchit-mode t)
  '(global-evil-surround-mode t)
+ '(global-flycheck-mode t)
  '(global-rainbow-delimiters-mode t)
  '(global-syntax-subword-mode t)
  '(gnu-apl-executable "myapl")
