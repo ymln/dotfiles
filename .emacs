@@ -23,6 +23,7 @@
  '(dtrt-indent-require-confirmation-flag nil)
  '(electric-indent-mode nil)
  '(electric-pair-mode t)
+ '(eshell-history-size 10000000)
  '(evil-mode t)
  '(flx-ido-mode t)
  '(flx-ido-threshhold 100)
