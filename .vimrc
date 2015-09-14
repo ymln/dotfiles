@@ -147,11 +147,9 @@ let g:VM_F10Menu = 0
 set wildmode=longest,full
 set wildmenu
 
-" CtrlP settings
-let g:ctrlp_map = '<BS>'
-let g:ctrlp_root_markers = ['.ctrlp-stop', '.git', 'var/']
-let g:ctrlp_clear_cache_on_exit = 0
-nmap gb :CtrlPBuffer
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+nmap <BS> :<C-u>Unite -start-insert file_rec/neovim<CR>
+nmap gb :<C-u>Unite -start-insert buffer<CR>
 
 cabbrev %% %:h
 
