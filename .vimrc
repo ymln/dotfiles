@@ -45,6 +45,7 @@ Plugin 'maxbrunsfeld/vim-yankstack'
 Plugin 'tpope/vim-abolish'
 Plugin 'bling/vim-airline'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'Shougo/unite.vim'
 
 filetype plugin indent on
 "}}}
