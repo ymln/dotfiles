@@ -46,6 +46,7 @@ Plugin 'tpope/vim-abolish'
 Plugin 'bling/vim-airline'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/vimproc.vim'
 
 filetype plugin indent on
 "}}}
@@ -147,9 +148,20 @@ let g:VM_F10Menu = 0
 set wildmode=longest,full
 set wildmenu
 
+let g:unite_source_grep_max_candidates = 200
+
+" Use ag in unite grep source.
+let g:unite_source_grep_command = 'ag'
+let g:unite_source_grep_default_opts =
+      \ '-i --vimgrep --hidden --ignore ' .
+      \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+let g:unite_source_grep_recursive_opt = ''
+
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nmap <BS> :<C-u>Unite -start-insert file_rec/neovim<CR>
-nmap gb :<C-u>Unite -start-insert buffer<CR>
+call unite#custom#source('buffer,file,file_rec,file_rec/neovim', 'sorters', 'sorter_rank')
+nmap <BS> :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert file_rec/neovim<CR>
+nmap gb :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert buffer<CR>
+nmap gr :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert grep:.<CR>
 
 cabbrev %% %:h
 
