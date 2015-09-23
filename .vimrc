@@ -47,6 +47,9 @@ Plugin 'bling/vim-airline'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/vimproc.vim'
+Plugin 'chrisbra/NrrwRgn'
+Plugin 'Shougo/neomru.vim'
+Plugin 'lambdalisue/unite-grep-vcs'
 
 filetype plugin indent on
 "}}}
@@ -151,7 +154,7 @@ set wildmenu
 let g:unite_source_grep_max_candidates = 200
 
 " Use ag in unite grep source.
-let g:unite_source_grep_command = 'ag'
+let g:unite_source_grep_command = 'git grep'
 let g:unite_source_grep_default_opts =
       \ '-i --vimgrep --hidden --ignore ' .
       \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
@@ -161,7 +164,16 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#custom#source('buffer,file,file_rec,file_rec/neovim', 'sorters', 'sorter_rank')
 nmap <BS> :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert file_rec/neovim<CR>
 nmap gb :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert buffer<CR>
-nmap gr :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert grep:.<CR>
+nmap gr :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert grep/git:.<CR>
+nmap gm :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert file_mru<CR>
+
+" Custom mappings for the unite buffer
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+  " Enable navigation with control-j and control-k in insert mode
+  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+endfunction
 
 cabbrev %% %:h
 

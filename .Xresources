@@ -1,5 +1,5 @@
-urxvt*background: #111111
-urxvt*foreground: #eeeeee
+!urxvt*background: #111111
+!urxvt*foreground: #eeeeee
 URxvt.font: xft:Monospace:pixelsize=15
 URxvt.perl-ext-common:  default
 URxvt.tabbed.tabbar-fg: 2
@@ -51,8 +51,8 @@ URxvt*urgentOnBell: true
 
 *background:            S_base03
 *foreground:            S_base00
-*fading:                40
-*fadeColor:             S_base03
+!*fading:                40
+!*fadeColor:             S_base03
 *cursorColor:           S_base1
 *pointerColorBackground:S_base01
 *pointerColorForeground:S_base1
