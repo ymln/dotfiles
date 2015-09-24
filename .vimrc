@@ -43,7 +43,6 @@ Plugin 'arnaud-lb/vim-php-namespace'
 Plugin 'rking/ag.vim'
 Plugin 'maxbrunsfeld/vim-yankstack'
 Plugin 'tpope/vim-abolish'
-Plugin 'bling/vim-airline'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/vimproc.vim'
@@ -162,7 +161,7 @@ let g:unite_source_grep_recursive_opt = ''
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#custom#source('buffer,file,file_rec,file_rec/neovim', 'sorters', 'sorter_rank')
-nmap <BS> :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert file_rec/neovim<CR>
+nmap <BS> :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert file_rec/git<CR>
 nmap gb :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert buffer<CR>
 nmap gr :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert grep/git:.<CR>
 nmap gm :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert file_mru<CR>
@@ -224,7 +223,4 @@ endfunction
 
 set laststatus=2
 
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
+set statusline=%t%h%m%r%y\ %l%=%P
