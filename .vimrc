@@ -224,3 +224,5 @@ endfunction
 set laststatus=2
 
 set statusline=%t%h%m%r%q\ %lL\ %=%{fugitive#statusline()}\ %P
+
+map <F1> "ryy:.!xargs -d '\n' rifle<CR>"rP
