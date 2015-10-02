@@ -22,4 +22,6 @@ set suggestengines=
 set gui=none,tabs
 source! /home/my/.vimperatorrc.local
 
+nmap v :execute "!play '" + content.location.href + "' &"<Return><Esc>
+
 " vim: set ft=vimperator:

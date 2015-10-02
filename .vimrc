@@ -43,7 +43,6 @@ Plugin 'arnaud-lb/vim-php-namespace'
 Plugin 'rking/ag.vim'
 Plugin 'maxbrunsfeld/vim-yankstack'
 Plugin 'tpope/vim-abolish'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'chrisbra/NrrwRgn'
@@ -98,7 +97,7 @@ set tags+=./tags.vendor;/$HOME
 " set spell
 
 set background=dark
-colorscheme solarized
+colorscheme desert
 
 set expandtab
 set tabstop=4
@@ -226,3 +225,6 @@ set laststatus=2
 set statusline=%t%h%m%r%q\ %lL\ %=%{fugitive#statusline()}\ %P
 
 map <F1> "ryy:.!xargs -d '\n' rifle<CR>"rP
+
+set synmaxcol=300
+
