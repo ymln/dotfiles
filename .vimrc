@@ -48,6 +48,7 @@ Plugin 'Shougo/vimproc.vim'
 Plugin 'chrisbra/NrrwRgn'
 Plugin 'Shougo/neomru.vim'
 Plugin 'lambdalisue/unite-grep-vcs'
+Plugin 'TVO--The-Vim-Outliner'
 
 filetype plugin indent on
 "}}}
@@ -115,8 +116,15 @@ set autoindent
 "nmap <BS> :FufCoverageFile
 
 " Detect Indent
+function! DoDetectIndent()
+  if exists('b:noDetectIndent')
+    return
+  endif
+  DetectIndent
+endfunction
 if has("autocmd")
-  autocmd BufReadPost * :DetectIndent
+  autocmd BufReadPost *.otl let b:noDetectIndent=1
+  autocmd BufReadPost * call DoDetectIndent()
 endif
 let g:detectindent_preferred_indent = 4
 let g:detectindent_preferred_expandtab = 4
