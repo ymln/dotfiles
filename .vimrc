@@ -224,7 +224,12 @@ set laststatus=2
 
 set statusline=%t%h%m%r%q\ %lL\ %=%{fugitive#statusline()}\ %P
 
-map <F1> "ryy:.!xargs -d '\n' rifle<CR>"rP
+function! Open(file)
+  new
+  call termopen(['open', a:file])
+  startinsert
+endfunction
+map <F1> :call Open(getline('.'))
 
 set synmaxcol=300
 
