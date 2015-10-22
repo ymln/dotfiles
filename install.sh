@@ -5,3 +5,6 @@ git fetch
 gh checkout -t origin/master
 rm .git
 bash -c "`curl -sL get.freshshell.com`"
+mkdir -p ~/.vim/bundle/
+cd ~/.vim/bundle/
+git clone https://github.com/VundleVim/Vundle.vim.git vundle
