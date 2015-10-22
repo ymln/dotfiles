@@ -195,7 +195,7 @@ set previewheight=30
 
 map gc c
 
-if has("neovim")
+if has("nvim")
   tnoremap <A-h> <C-\><C-n><C-w>h
   tnoremap <A-j> <C-\><C-n><C-w>j
   tnoremap <A-k> <C-\><C-n><C-w>k
