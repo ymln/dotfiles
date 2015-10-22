@@ -113,7 +113,7 @@ set guioptions-=r
 set guioptions-=L
 
 set autoindent
-"nmap <BS> :FufCoverageFile
+"nnoremap <BS> :FufCoverageFile
 
 " Detect Indent
 function! DoDetectIndent()
@@ -160,7 +160,7 @@ set wildmenu
 let g:unite_source_grep_max_candidates = 200
 
 " Use ag in unite grep source.
-let g:unite_source_grep_command = 'git grep'
+let g:unite_source_grep_command = 'ag'
 let g:unite_source_grep_default_opts =
       \ '-i --vimgrep --hidden --ignore ' .
       \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
@@ -168,22 +168,22 @@ let g:unite_source_grep_recursive_opt = ''
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#custom#source('buffer,file,file_rec,file_rec/neovim', 'sorters', 'sorter_rank')
-nmap <BS> :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert file_rec/git<CR>
-nmap gb :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert buffer<CR>
-nmap gr :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert grep/git:.<CR>
-nmap gm :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert file_mru<CR>
+nnoremap <BS> :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert file_rec/git<CR>
+nnoremap gb :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert buffer<CR>
+nnoremap gr :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert grep:.<CR>
+nnoremap gm :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert file_mru<CR>
 
-" Custom mappings for the unite buffer
+" Custom noremappings for the unite buffer
 autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
   " Enable navigation with control-j and control-k in insert mode
-  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+  inoremap <buffer> <C-j>   <Plug>(unite_select_next_line)
+  inoremap <buffer> <C-k>   <Plug>(unite_select_previous_line)
 endfunction
 
 cabbrev %% %:h
 
-imap  
+inoremap  
 
 set copyindent
 
@@ -206,21 +206,23 @@ nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
+nnoremap <A-H> :bprevious<CR>
+nnoremap <A-L> :bnext<CR>
 
 map g1 :only<CR>
 
 let g:syntastic_php_checkers = ["php"]
 
-imap <A-/> <C-n>
+inoremap <A-/> <C-n>
 
-nmap <Space>s :w<CR>
-nmap <Space>n :noh<CR>
-nmap <A-x> :
-nmap <Space>c :Git diff --cached<CR>
-nmap <Space>C :Gcommit<CR>
-nmap <Space>l :tabnew term://tig<CR>i
+nnoremap <Space>s :w<CR>
+nnoremap <Space>n :noh<CR>
+nnoremap <A-x> :
+nnoremap <Space>c :Git diff --cached<CR>
+nnoremap <Space>C :Gcommit<CR>
+nnoremap <Space>l :tabnew term://tig<CR>i
 
-nmap <Space>t :tabnew<CR>
+nnoremap <Space>t :tabnew<CR>
 
 function! Preserve(command)
   let w = winsaveview()
@@ -230,7 +232,7 @@ endfunction
 
 set laststatus=2
 
-set statusline=%t%h%m%r%q\ %lL\ %=%{fugitive#statusline()}\ %P
+set statusline=%t%h%m%r%q\ %=%{fugitive#statusline()}\ %lL\ %P
 
 function! Open(file)
   new

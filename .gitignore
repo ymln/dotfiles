@@ -1,4 +1,5 @@
 *
+!install.sh
 !.gitignore
 !.vimperatorrc
 !.vimrc
@@ -6,3 +7,5 @@
 !.zshrc
 !.emacs
 !.zlogin
+!.freshrc
+!.gtkrc-2.0
