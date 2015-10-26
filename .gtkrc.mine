@@ -1,0 +1,5 @@
+gtk-key-theme-name = "Emacs"
+gtk-error-bell = 0
+style "default" {
+    GtkScale::slider-width = 5
+}

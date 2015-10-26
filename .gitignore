@@ -8,7 +8,7 @@
 !.emacs
 !.zlogin
 !.freshrc
-!.gtkrc-2.0
+!.gtkrc.mine
 !.config
 !.config/dunst
 !.config/dunst/dunstrc

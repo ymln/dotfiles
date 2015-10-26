@@ -33,7 +33,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'desert256.vim'
 Plugin 'joonty/vim-xdebug.git'
 Plugin 'ShowTrailingWhitespace'
-Plugin 'slimv.vim'
+Plugin 'kovisoft/slimv'
 Plugin 'evidens/vim-twig'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'groenewege/vim-less'
@@ -195,7 +195,7 @@ set previewheight=30
 
 map gc c
 
-if has("neovim")
+if has("nvim")
   tnoremap <A-h> <C-\><C-n><C-w>h
   tnoremap <A-j> <C-\><C-n><C-w>j
   tnoremap <A-k> <C-\><C-n><C-w>k
@@ -232,7 +232,7 @@ endfunction
 
 set laststatus=2
 
-set statusline=%t%h%m%r%q\ %=%{fugitive#statusline()}\ %lL\ %P
+set statusline=%t%h%m%r%q\ %<%=%{fugitive#statusline()}\ %lL\ %P
 
 function! Open(file)
   new
@@ -243,3 +243,5 @@ map <F1> :call Open(getline('.'))
 
 set synmaxcol=300
 
+set backupdir=~/.vim/backup/
+set directory=~/.vim/swap/
