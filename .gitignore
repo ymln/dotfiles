@@ -9,3 +9,6 @@
 !.zlogin
 !.freshrc
 !.gtkrc-2.0
+!.config
+!.config/dunst
+!.config/dunst/dunstrc
