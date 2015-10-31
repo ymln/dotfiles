@@ -1,0 +1,9 @@
+#!/bin/zsh
+progname=$1
+class=$2
+if xdotool search --class $class; then
+    i3-msg "[class=\"$class\"] focus"
+else
+    eval $progname
+    sleep 1s
+fi

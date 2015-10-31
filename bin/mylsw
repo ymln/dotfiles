@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+from subprocess import getstatusoutput
+import json
+
+def output_names(tree):
+    if 'nodes' in tree:
+        if len(tree['nodes']) == 0:
+            if 'name' in tree:
+                print(tree['name'])
+        else:
+            for node in tree['nodes']:
+                output_names(node)
+
+def main():
+    (status, output) = getstatusoutput('i3-msg -t get_tree')
+    if status != 0:
+        return
+    tree = json.loads(output)
+    output_names(tree)
+
+if __name__ == '__main__':
+    main()

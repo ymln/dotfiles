@@ -1,0 +1,5 @@
+#!/bin/zsh
+NOW=`date +%s`
+echo $NOW >! ~/.backup-cache/$1
+#LC_ALL=C duply $1 backup
+tarsnap -c -f $1-`date +%Y-%m-%d+%H:%M:%S` $1

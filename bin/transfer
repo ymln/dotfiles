@@ -1,0 +1,5 @@
+#!/bin/zsh
+url=`curl --upload-file $1 https://transfer.sh`
+echo
+echo $url
+echo $url | xclip -i

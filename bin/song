@@ -1,0 +1,13 @@
+CACHEDIR=~/.cache/songs
+PLAYER='mpv --no-vid'
+song=$*
+file="$CACHEDIR/$song"
+mkdir -p $CACHEDIR
+
+if [ -e "$file" ]; then
+    $PLAYER "$file"
+else
+    youtube-dl -xo "$file.part.%(ext)s" "ytsearch:$song"
+    mv "$file.part."* "$file"
+    $PLAYER "$file"
+fi

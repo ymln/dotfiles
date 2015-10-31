@@ -1,0 +1,4 @@
+#!/bin/zsh
+from=$1
+to=${1%.*}.$2
+ffmpeg -i $1 -acodec copy -vn $to

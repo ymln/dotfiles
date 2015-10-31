@@ -1,0 +1,28 @@
+#!/bin/env python
+import os, re, shutil
+
+def findSubtitle(season, name):
+    DIR = os.path.join(os.environ['HOME'], 'dowt/Subtitles/Series {}'.format(season))
+    for f in os.listdir(DIR):
+        if f.lower().find(name.lower()) != -1:
+            return os.path.join(DIR, f)
+
+def main():
+    files = os.listdir()
+    for f in files:
+        try:
+            dw, se, serial, name = f.split(" - ")
+            season, episode = re.match("S([0-9]{2})E([0-9]{2})", se).groups()
+            clearName = re.match("([^()-]+)", name).groups()[0].strip()
+            sub = findSubtitle(season, clearName.strip('.avi'))
+
+            if f.find('avi') != -1 and sub:
+                to = f.replace('avi', 'srt')
+                print("Copying {} to {}".format(sub, to))
+                shutil.copyfile(sub, to)
+
+        except ValueError:
+            pass
+
+if __name__ == '__main__':
+    main()

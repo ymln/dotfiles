@@ -1,0 +1,8 @@
+#!/bin/zsh
+F=`mktemp /tmp/XXXXXXXX.png`
+scrot -s $F
+
+if [ -s $F ]; then
+    img2clip $F
+    rm $F
+fi

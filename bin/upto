@@ -1,0 +1,15 @@
+#!/bin/zsh
+if [ $# != 1 ]; then
+    echo "Must have exactly one argument" >&2
+    exit 1
+fi
+
+while [ $PWD != / ]; do
+    if [ -e $1 ]; then
+        echo $PWD
+        exit
+    fi
+    cd ..
+done
+
+exit 2

@@ -1,0 +1,8 @@
+#!/bin/zsh
+LAST_BACKUP=`cat ~/.backup-cache/$1`
+ONE_DAY=$(( 60 * 60 * 24 ))
+NEXT_BACKUP=$(( $LAST_BACKUP + $ONE_DAY ))
+NOW=`date +%s`
+if (( $NEXT_BACKUP < $NOW )); then
+    echo "Time to back up $1" 1>&2
+fi

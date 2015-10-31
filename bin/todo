@@ -1,0 +1,17 @@
+#!/bin/zsh
+LAST=.todo.last
+TODO=.todo
+ed=${EDITOR:-VISUAL:-vi}
+
+function new {
+    ls=`ls | sort`
+    if [ ! -e $LAST ]; then
+        echo $ls
+    else
+        comm -23 =(echo $ls) $LAST
+    fi
+    echo $ls >! $LAST
+}
+
+new >> $TODO
+$ed $TODO
