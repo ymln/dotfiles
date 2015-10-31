@@ -15,40 +15,43 @@ runtime! debian.vim
 " options, so any other options should be set AFTER setting 'compatible'.
 "set compatible
 
-"{{{ Vundles
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Plugin 'gmarik/vundle'
-Plugin 'L9'
-Plugin 'scrooloose/syntastic'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'matchit.zip'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-fugitive'
-Plugin 'majutsushi/tagbar'
-"Plugin 'Vimacs'
-Plugin 'ciaranm/detectindent'
-Plugin 'kien/ctrlp.vim'
-Plugin 'desert256.vim'
-Plugin 'joonty/vim-xdebug.git'
-Plugin 'ShowTrailingWhitespace'
-Plugin 'kovisoft/slimv'
-Plugin 'evidens/vim-twig'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'groenewege/vim-less'
-Plugin 'snipMate'
-Plugin 'nielsmadan/harlequin'
-Plugin 'arnaud-lb/vim-php-namespace'
-Plugin 'rking/ag.vim'
-Plugin 'maxbrunsfeld/vim-yankstack'
-Plugin 'tpope/vim-abolish'
-Plugin 'Shougo/unite.vim'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'chrisbra/NrrwRgn'
-Plugin 'Shougo/neomru.vim'
-Plugin 'lambdalisue/unite-grep-vcs'
-Plugin 'TVO--The-Vim-Outliner'
+"{{{
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+call plug#begin()
+Plug 'L9'
+Plug 'scrooloose/syntastic'
+Plug 'scrooloose/nerdcommenter'
+Plug 'matchit.zip'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-fugitive'
+Plug 'majutsushi/tagbar'
+"Plug 'Vimacs'
+Plug 'ciaranm/detectindent'
+Plug 'kien/ctrlp.vim'
+Plug 'desert256.vim'
+Plug 'joonty/vim-xdebug'
+Plug 'ShowTrailingWhitespace'
+Plug 'kovisoft/slimv'
+Plug 'evidens/vim-twig'
+Plug 'kchmck/vim-coffee-script'
+Plug 'groenewege/vim-less'
+Plug 'snipMate'
+Plug 'nielsmadan/harlequin'
+Plug 'arnaud-lb/vim-php-namespace'
+Plug 'rking/ag.vim'
+Plug 'maxbrunsfeld/vim-yankstack'
+Plug 'tpope/vim-abolish'
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/vimproc.vim'
+Plug 'chrisbra/NrrwRgn'
+Plug 'Shougo/neomru.vim'
+Plug 'lambdalisue/unite-grep-vcs'
+Plug 'TVO--The-Vim-Outliner'
+Plug 'thinca/vim-qfreplace'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
+call plug#end()
 
 filetype plugin indent on
 "}}}
@@ -168,9 +171,9 @@ let g:unite_source_grep_recursive_opt = ''
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#custom#source('buffer,file,file_rec,file_rec/neovim', 'sorters', 'sorter_rank')
-nnoremap <BS> :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert file_rec/git<CR>
-nnoremap gb :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert buffer<CR>
-nnoremap gr :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert grep:.<CR>
+nnoremap <BS> :Files<CR>
+nnoremap gb :Buffers<CR>
+nnoremap gr :Ag<CR>
 nnoremap gm :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert file_mru<CR>
 
 " Custom noremappings for the unite buffer
