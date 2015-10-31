@@ -42,11 +42,8 @@ Plug 'arnaud-lb/vim-php-namespace'
 Plug 'rking/ag.vim'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'tpope/vim-abolish'
-Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimproc.vim'
 Plug 'chrisbra/NrrwRgn'
-Plug 'Shougo/neomru.vim'
-Plug 'lambdalisue/unite-grep-vcs'
 Plug 'TVO--The-Vim-Outliner'
 Plug 'thinca/vim-qfreplace'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
@@ -169,20 +166,10 @@ let g:unite_source_grep_default_opts =
       \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
 let g:unite_source_grep_recursive_opt = ''
 
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#custom#source('buffer,file,file_rec,file_rec/neovim', 'sorters', 'sorter_rank')
 nnoremap <BS> :Files<CR>
 nnoremap gb :Buffers<CR>
 nnoremap gr :Ag<CR>
-nnoremap gm :<C-u>Unite -direction=dynamicbottom -prompt-direction=top -start-insert file_mru<CR>
-
-" Custom noremappings for the unite buffer
-autocmd FileType unite call s:unite_settings()
-function! s:unite_settings()
-  " Enable navigation with control-j and control-k in insert mode
-  inoremap <buffer> <C-j>   <Plug>(unite_select_next_line)
-  inoremap <buffer> <C-k>   <Plug>(unite_select_previous_line)
-endfunction
+nnoremap gm :History<CR>
 
 cabbrev %% %:h
 
