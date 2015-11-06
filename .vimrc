@@ -48,6 +48,7 @@ Plug 'TVO--The-Vim-Outliner'
 Plug 'thinca/vim-qfreplace'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+Plug 'joonty/vdebug'
 call plug#end()
 
 filetype plugin indent on
