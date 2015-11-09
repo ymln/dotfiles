@@ -12,6 +12,7 @@
 !.config
 !.config/dunst
 !.config/dunst/dunstrc
+!.tmux.conf
 !bin
 !bin/addmagnet
 !bin/backup
