@@ -1,0 +1,3 @@
+#!/bin/zsh
+alias g=git
+git stash && eval $* && git stash pop
