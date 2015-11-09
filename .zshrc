@@ -34,7 +34,7 @@ alias vd=vimdiff
 alias task='nocorrect task'
 alias rr='ranger'
 alias gg='git grep'
-alias gst='git status'
+alias gst=scmpuff_status
 alias f='fasd -f'
 alias v='f -e vim'
 alias -g G='| grep'
@@ -128,3 +128,5 @@ fi
 source ~/.fresh/build/shell.sh
 
 eval "$(fasd --init auto)"
+
+eval "$(scmpuff init -s)"
