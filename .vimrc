@@ -30,7 +30,7 @@ Plug 'majutsushi/tagbar'
 Plug 'ciaranm/detectindent'
 Plug 'kien/ctrlp.vim'
 Plug 'desert256.vim'
-Plug 'joonty/vim-xdebug'
+"Plug 'joonty/vim-xdebug'
 Plug 'ShowTrailingWhitespace'
 Plug 'kovisoft/slimv'
 Plug 'evidens/vim-twig'
@@ -238,6 +238,6 @@ map <F1> :call Open(getline('.'))
 set synmaxcol=300
 
 set backupdir=~/.vim/backup/
-set directory=~/.vim/swap/
+set directory=~/.vim/swap//
 
 let g:jsx_ext_required = 0
