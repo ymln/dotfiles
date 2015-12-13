@@ -51,6 +51,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'joonty/vdebug'
+Plug 'editorconfig/editorconfig-vim'
+
 call plug#end()
 
 filetype plugin indent on

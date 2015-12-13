@@ -53,7 +53,6 @@ alias ls="ls --group-directories-first --color=auto"
 alias sl=ls
 alias m="fasd -e mpv"
 alias ytdl=youtube-dl
-alias l='ls -a | grep -ia'
 alias ,='cd ~/,'
 
 function e {
@@ -130,3 +129,37 @@ source ~/.fresh/build/shell.sh
 eval "$(fasd --init auto)"
 
 eval "$(scmpuff init -s)"
+
+fzf-process() {
+  read key
+  read f
+  export f
+  case $key in
+    alt-h)
+      cd ..
+      fzf-fm
+      ;;
+    /)
+      find -type f | fzf-open
+      ;;
+    alt-m)
+      mpv $f
+      ;;
+    enter)
+      if [ -d $f ]; then
+        cd $f
+        fzf-fm
+      else
+        open $f
+      fi
+      ;;
+  esac
+}
+fzf-open() {
+  fzf --expect alt-h,/,alt-m,enter | fzf-process
+}
+fzf-fm() {
+  ls -A | fzf-open
+}
+
+bindkey -s '\eo' 'fzf-fm\n'
