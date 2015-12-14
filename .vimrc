@@ -52,6 +52,8 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'joonty/vdebug'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'editorconfig/editorconfig-vim'
+
 call plug#end()
 
 filetype plugin indent on
