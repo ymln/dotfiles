@@ -51,6 +51,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'joonty/vdebug'
+Plug 'terryma/vim-multiple-cursors'
 Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()
@@ -242,3 +243,5 @@ set backupdir=~/.vim/backup/
 set directory=~/.vim/swap//
 
 let g:jsx_ext_required = 0
+
+let g:multi_cursor_quit_key='<C-g>'
