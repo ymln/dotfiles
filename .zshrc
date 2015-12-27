@@ -163,3 +163,4 @@ fzf-fm() {
 }
 
 bindkey -s '\eo' 'fzf-fm\n'
+bindkey -s '^z' 'disown\n'
