@@ -53,6 +53,7 @@ Plug 'mxw/vim-jsx'
 Plug 'joonty/vdebug'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'ludovicchabant/vim-gutentags'
 
 call plug#end()
 
