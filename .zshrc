@@ -8,6 +8,9 @@ precmd() {
   vcs_info
   echo -n "\a"
 }
+preexec () {
+  print -Pn "\e]0;%n@%m: %~ | $1\a"
+}
 zstyle ':vcs_info:*' formats \
   '%F{yellow}(%b)'
 PROMPT='%F{green}%n%F{yellow}@%F{green}%m${vcs_info_msg_0_} %F{green}%3~ %F{yellow}» %F{reset}'
@@ -150,7 +153,8 @@ fzf-process() {
         cd $f
         fzf-fm
       else
-        open $f
+        zle reset-prompt
+        zle -U ' '$f
       fi
       ;;
   esac
@@ -162,5 +166,6 @@ fzf-fm() {
   ls -A | fzf-open
 }
 
-bindkey -s '\eo' 'fzf-fm\n'
+zle -N fzf-fm
+bindkey '\eo' fzf-fm
 bindkey -s '^z' 'bg\n'

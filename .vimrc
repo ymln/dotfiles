@@ -246,3 +246,7 @@ set directory=~/.vim/swap//
 let g:jsx_ext_required = 0
 
 let g:multi_cursor_quit_key='<C-g>'
+
+nnoremap cn :cn<CR>
+nnoremap cp :cp<CR>
+nnoremap cN :cN<CR>
