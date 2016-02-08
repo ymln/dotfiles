@@ -133,6 +133,11 @@ eval "$(fasd --init auto)"
 
 eval "$(scmpuff init -s)"
 
+escape() {
+  # See http://zsh.sourceforge.net/Doc/Release/Expansion.html#Parameter-Expansion-Flags
+  echo "${(q-)1}"
+}
+
 fzf-process() {
   read key
   read f
@@ -154,7 +159,8 @@ fzf-process() {
         fzf-fm
       else
         zle reset-prompt
-        zle -U ' '$f
+        ef=`escape $f`
+        zle -U ' '$ef
       fi
       ;;
   esac
