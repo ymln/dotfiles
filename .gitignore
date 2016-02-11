@@ -3,6 +3,15 @@
 !.gitignore
 !.vimperatorrc
 !.vimrc
+!.vim
+!.vim/init.vim
+!.vim/
+!.vim/backup
+!.vim/backup/.gitkeep
+!.vim/swap
+!.vim/swap/.gitkeep
+!.vim/autoload
+!.vim/autoload/.gitkeep
 !.Xresources
 !.zshrc
 !.emacs
@@ -12,6 +21,7 @@
 !.config
 !.config/dunst
 !.config/dunst/dunstrc
+!.config/nvim
 !.tmux.conf
 !bin
 !bin/addmagnet
@@ -23,6 +33,7 @@
 !bin/cpsubs
 !bin/EDITOR
 !bin/fzf
+!bin/fzf-tmux
 !bin/img2clip
 !bin/mylsw
 !bin/myurxvtc
