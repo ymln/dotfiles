@@ -8,7 +8,12 @@
 #
 # See http://freshshell.com/readme for documentation.
 
-fresh freshshell/fresh bin/fresh --bin
+make-ucg() {
+    libtoolize && aclocal && autoheader && autoconf && automake --add-missing && ./configure && make
+}
+fresh freshshell/fresh bin/fresh --bin --ref=e9b3215f2ac16873c69e09ec8fe8c9ea066c3d65
 fresh Vifon/deer deer
 fresh clvv/fasd fasd --bin
 fresh jomo/imgur-screenshot imgur-screenshot.sh --bin
+fresh gvansickle/ucg ucg --bin --pre=make-ucg
+fresh neovim/neovim build/bin/nvim --bin --pre=make

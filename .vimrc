@@ -97,7 +97,7 @@ set mouse=a		" Enable mouse usage (all modes)
 let g:tagbar_left = 1
 let g:tagbar_autofocus = 1
 let g:tagbar_autoclose = 1
-map é :TagbarToggle<CR> " alt-i
+nnoremap é :BTags<CR> " alt-i
 
 set tags+=./tags;/$HOME
 set tags+=./tags.vendor;/$HOME
