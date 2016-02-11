@@ -1,6 +1,10 @@
 #!/bin/zsh
 # Install zsh, git, base-devel/build-essential
-# To run: curl https://raw.githubusercontent.com/ymln/dotfiles/master/install.sh | zsh
+# Add SSH key to github
+# Run curl https://raw.githubusercontent.com/ymln/dotfiles/master/install.sh | zsh
+
+set -e
+
 git init --separate-git-dir=$HOME/.githome
 git remote add origin git@github.com:ymln/dotfiles.git
 git fetch
