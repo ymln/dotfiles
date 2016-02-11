@@ -1,5 +1,5 @@
 #!/bin/zsh
-# Install zsh, git, ssh, base-devel/build-essential
+# Install curl, zsh, git, ssh, cmake, base-devel/build-essential
 # Add SSH key to github
 # Run curl https://raw.githubusercontent.com/ymln/dotfiles/master/install.sh | zsh
 
