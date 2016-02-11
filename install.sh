@@ -11,10 +11,8 @@ git fetch
 git checkout -t origin/master
 rm .git
 
-zsh -c "`curl https://raw.githubusercontent.com/freshshell/fresh/master/install.sh`"
-source .fresh/build/shell.sh
-fresh
-source .fresh/build/shell.sh
+git clone https://github.com/freshshell/fresh ~/.fresh/source/freshshell/fresh
+~/.fresh/source/freshshell/fresh/bin/fresh
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
