@@ -54,6 +54,7 @@ Plug 'joonty/vdebug'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'rhysd/devdocs.vim'
 
 call plug#end()
 
@@ -97,7 +98,7 @@ set mouse=a		" Enable mouse usage (all modes)
 let g:tagbar_left = 1
 let g:tagbar_autofocus = 1
 let g:tagbar_autoclose = 1
-nnoremap é :BTags<CR> " alt-i
+nnoremap <A-i> :BTags<CR>
 
 set tags+=./tags;/$HOME
 set tags+=./tags.vendor;/$HOME
@@ -250,3 +251,21 @@ let g:multi_cursor_quit_key='<C-g>'
 nnoremap cn :cn<CR>
 nnoremap cp :cp<CR>
 nnoremap cN :cN<CR>
+
+set fixeol
+
+nnoremap <M-n> :Lines<CR>
+
+nnoremap K :silent !firefox https://devdocs.io\#q=<C-r><C-w> & <CR>
+
+cnoremap <C-a>  <Home>
+cnoremap <C-b>  <Left>
+cnoremap <C-f>  <Right>
+cnoremap <C-d>  <Delete>
+cnoremap <M-b>  <S-Left>
+cnoremap <M-f>  <S-Right>
+cnoremap <M-d>  <S-right><C-w>
+cnoremap <Esc>b <S-Left>
+cnoremap <Esc>f <S-Right>
+cnoremap <Esc>d <S-right><C-w>
+cnoremap <C-g>  <C-c>
