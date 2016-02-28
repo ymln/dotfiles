@@ -40,7 +40,10 @@
 !.gitignore
 !.gtkrc.mine
 !install.sh
+!.mpd
 !.mpdconf
+!.mpd/playlists
+!.mpd/playlists/.gitkeep
 !.ncmpcpp
 !.ncmpcpp/bindings
 !.tmux.conf
