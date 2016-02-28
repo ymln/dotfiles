@@ -1,0 +1,5 @@
+#!/usr/bin/zsh
+dir=`print -l /run/media/*/* | dmenu`
+if [ -n $dir ]; then
+    udiskie-umount $dir
+fi

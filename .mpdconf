@@ -1,0 +1,15 @@
+music_directory "~/music"
+playlist_directory "~/.mpd/playlists"
+db_file "~/.mpd/database"
+pid_file "~/.mpd/pid"
+state_file "~/.mpd/state"
+sticker_file "~/.mpd/sticker.sql"
+gapless_mp3_playback "yes"
+restore_paused "yes"
+auto_update "yes"
+follow_outside_symlinks "yes"
+follow_inside_symlinks "yes"
+input {
+        plugin "curl"
+}
+replaygain "auto"

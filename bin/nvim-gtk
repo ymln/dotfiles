@@ -1,0 +1,14 @@
+#!/usr/bin/python2
+import gi
+gi.require_version('Gdk', '3.0')
+gi.require_version('PangoCairo', '1.0')
+
+import sys
+from neovim import attach
+from neovim.ui.gtk_ui import GtkUI
+from neovim.ui.ui_bridge import UIBridge
+
+nvim = attach('child', argv=["/bin/env", "nvim", "--embed"] + sys.argv[1:])
+ui = GtkUI()
+bridge = UIBridge()
+bridge.connect(nvim, ui)
