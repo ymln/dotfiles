@@ -13,6 +13,7 @@
 !bin/img2clip
 !bin/l
 !bin/lsq
+!bin/moveg
 !bin/mylsw
 !bin/myurxvtc
 !bin/nvim-gtk
