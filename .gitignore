@@ -49,6 +49,9 @@
 !.tmux.conf
 !.vim
 !.vim/
+!.vim/after
+!.vim/after/plugin
+!.vim/after/plugin/gutentags.vim
 !.vim/autoload
 !.vim/autoload/.gitkeep
 !.vim/backup
