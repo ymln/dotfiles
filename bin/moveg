@@ -91,7 +91,7 @@ run() {
         if [ $found ]; then
             rm -r $1
         fi
-    elif [ -e $1 ]; then
+    elif [ -e $1 -o -L $1 ]; then
         log $1 is a file
         move_file $1
     else
