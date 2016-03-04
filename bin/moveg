@@ -44,7 +44,7 @@ move_file() {
         episode)
             season=`prop $json season`
             episode=`prop $json episode`
-            if [ -z $title -o -z $season -o -z $episode -o -z $extension ]; then
+            if [[ -z $title || -z $season || -z $episode || -z $extension ]]; then
                 error could not find necessary params for $1
             else
                 log making dir $title
@@ -57,11 +57,11 @@ move_file() {
             fi
             ;;
         movie)
-            if [ -z $title -o -z $extension ]; then
+            if [[ -z $title || -z $extension ]]; then
                 error could not find necessary params for $1
             else
                 mvf $1 $MOVIES/${title}.$extension
-                if [ -e `srt $1` ]; then
+                if [[ -e `srt $1` ]]; then
                     mvf `srt $1` `srt $MOVIES/${title}.$extension`
                 fi
             fi
@@ -91,7 +91,7 @@ run() {
         if [ $found ]; then
             rm -r $1
         fi
-    elif [ -e $1 -o -L $1 ]; then
+    elif [[ -e $1 || -L $1 ]]; then
         log $1 is a file
         move_file $1
     else

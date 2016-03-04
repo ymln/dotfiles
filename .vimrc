@@ -55,6 +55,8 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'rhysd/devdocs.vim'
+Plug 'tpope/vim-fireplace'
+Plug 'guns/vim-slamhound'
 
 call plug#end()
 
