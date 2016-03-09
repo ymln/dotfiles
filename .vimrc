@@ -57,6 +57,11 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'rhysd/devdocs.vim'
 Plug 'tpope/vim-fireplace'
 Plug 'guns/vim-slamhound'
+Plug 'tpope/vim-salve'
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-dispatch'
+Plug 'guns/vim-clojure-static'
+Plug 'kien/rainbow_parentheses.vim'
 
 call plug#end()
 
@@ -258,7 +263,7 @@ set fixeol
 
 nnoremap <M-n> :Lines<CR>
 
-nnoremap K :silent !firefox https://devdocs.io\#q=<C-r><C-w> & <CR>
+"nnoremap K :silent !firefox https://devdocs.io\#q=<C-r><C-w> & <CR>
 
 cnoremap <C-a>  <Home>
 cnoremap <C-b>  <Left>
@@ -271,3 +276,19 @@ cnoremap <Esc>b <S-Left>
 cnoremap <Esc>f <S-Right>
 cnoremap <Esc>d <S-right><C-w>
 cnoremap <C-g>  <C-c>
+
+let g:salve_auto_start_repl = 1
+
+
+let g:clojure_fuzzy_indent = 1
+let g:clojure_fuzzy_indent_patterns = ['^with', '^def', '^let']
+let g:clojure_fuzzy_indent_blacklist = ['-fn$', '\v^with-%(meta|out-str|loading-context)$']
+
+let g:detectindent_preferred_indent = 2
+
+autocmd VimEnter * RainbowParenthesesToggle
+autocmd Syntax * RainbowParenthesesLoadRound
+autocmd Syntax * RainbowParenthesesLoadSquare
+autocmd Syntax * RainbowParenthesesLoadBraces
+
+autocmd BufWritePost *.clj silent Require
