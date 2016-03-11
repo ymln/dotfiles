@@ -61,7 +61,7 @@ Plug 'tpope/vim-salve'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-dispatch'
 Plug 'guns/vim-clojure-static'
-Plug 'kien/rainbow_parentheses.vim'
+Plug 'luochen1990/rainbow'
 
 call plug#end()
 
@@ -286,9 +286,6 @@ let g:clojure_fuzzy_indent_blacklist = ['-fn$', '\v^with-%(meta|out-str|loading-
 
 let g:detectindent_preferred_indent = 2
 
-autocmd VimEnter * RainbowParenthesesToggle
-autocmd Syntax * RainbowParenthesesLoadRound
-autocmd Syntax * RainbowParenthesesLoadSquare
-autocmd Syntax * RainbowParenthesesLoadBraces
+let g:rainbow_active = 1
 
 autocmd BufWritePost *.clj silent Require
