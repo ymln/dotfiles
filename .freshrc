@@ -17,4 +17,4 @@ fresh Vifon/deer deer
 fresh clvv/fasd fasd --bin
 fresh jomo/imgur-screenshot imgur-screenshot.sh --bin
 #fresh gvansickle/ucg ucg --bin --pre=make-ucg
-fresh hchbaw/auto-fu.zsh auto-fu.zsh --ref=42dbef5da89360f132cce010004d4c674a13c951
+#fresh hchbaw/auto-fu.zsh auto-fu.zsh --ref=42dbef5da89360f132cce010004d4c674a13c951
