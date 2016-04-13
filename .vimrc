@@ -62,6 +62,7 @@ Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-dispatch'
 Plug 'guns/vim-clojure-static'
 Plug 'luochen1990/rainbow'
+Plug 'Rename'
 
 call plug#end()
 
@@ -281,11 +282,9 @@ let g:salve_auto_start_repl = 1
 
 
 let g:clojure_fuzzy_indent = 1
-let g:clojure_fuzzy_indent_patterns = ['^with', '^def', '^let']
+let g:clojure_fuzzy_indent_patterns = ['^with', '^def', '^let', '^match$']
 let g:clojure_fuzzy_indent_blacklist = ['-fn$', '\v^with-%(meta|out-str|loading-context)$']
 
 let g:detectindent_preferred_indent = 2
-
-let g:rainbow_active = 1
 
 autocmd BufWritePost *.clj silent Require
