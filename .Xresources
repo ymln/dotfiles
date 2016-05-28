@@ -10,3 +10,4 @@ URxvt.color4  : #34346565A4A4
 URxvt.color12 : #77f
 URxvt.color14 : #859900
 URxvt*urgentOnBell: true
+URxvt*saveLines: 1000000
