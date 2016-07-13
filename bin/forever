@@ -1,0 +1,5 @@
+#!/usr/bin/zsh
+trap 'kill $!' SIGINT
+while true; do
+  $@
+done

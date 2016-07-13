@@ -8,6 +8,7 @@
 !bin/cpsubs
 !bin/dmenu_umount
 !bin/EDITOR
+!bin/forever
 !bin/fzf
 !bin/fzf-tmux
 !bin/img2clip
