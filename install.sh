@@ -1,9 +1,11 @@
 #!/bin/zsh
-# Install curl, zsh, git, ssh, cmake, base-devel/build-essential
+# Install curl, zsh, git, ssh, cmake, neovim, base-devel/build-essential
 # Add SSH key to github
 # Run curl https://raw.githubusercontent.com/ymln/dotfiles/master/install.sh | zsh
 
 set -e
+
+cd
 
 git init --separate-git-dir=$HOME/.githome
 git remote add origin git@github.com:ymln/dotfiles.git
