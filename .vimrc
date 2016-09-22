@@ -117,8 +117,8 @@ set background=dark
 colorscheme desert
 
 set expandtab
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 
 set hlsearch
 set guifont="Monospace\ 11"
@@ -136,14 +136,15 @@ function! DoDetectIndent()
   if exists('b:noDetectIndent')
     return
   endif
-  DetectIndent
+  "DetectIndent
 endfunction
 if has("autocmd")
   autocmd BufReadPost *.otl let b:noDetectIndent=1
+  autocmd BufReadPost *.clj* let b:noDetectIndent=1
   autocmd BufReadPost * call DoDetectIndent()
 endif
-let g:detectindent_preferred_indent = 4
-let g:detectindent_preferred_expandtab = 4
+let g:detectindent_preferred_indent = 2
+let g:detectindent_preferred_expandtab = 2
 
 " Syntax highlighting:
 if has("autocmd")

@@ -16,6 +16,13 @@ precmd() {
 preexec() {
   title "%n@%m: %~ | $1"
 }
+DIR_FILE=/tmp/last-dir
+chpwd() {
+  echo $PWD > $DIR_FILE
+}
+-() {
+  cd $(cat $DIR_FILE)
+}
 zstyle ':vcs_info:*' formats \
   '%F{yellow}(%b)'
 PROMPT='%F{green}%n%F{yellow}@%F{green}%m${vcs_info_msg_0_}%(1v.(bg: %v%).) %F{green}%3~ %F{yellow}» %F{reset}'
@@ -50,6 +57,7 @@ alias -g GI='| grep -i'
 alias -g GV='| grep -v'
 alias -g V='| grep -v'
 alias -g L='| less'
+alias -g N='2> /dev/null'
 alias xargs1='xargs -n 1'
 alias gs=''
 alias ack=ack-grep
@@ -153,7 +161,7 @@ fzf-process() {
       fzf-fm
       ;;
     /)
-      find -type f | fzf-open
+      find . | fzf-open
       ;;
     alt-m)
       mpv $f
@@ -176,10 +184,25 @@ fzf-open() {
 fzf-fm() {
   ls -A | fzf-open
 }
+fzf-ranger() {
+  f=`find * 2> /dev/null | uniq | fzf`
+  if [ -z $f ]; then
+    # nothing
+  elif [ -d $f ]; then
+    ranger "$f"
+  else
+    ranger --selectfile="$f"
+  fi
+}
 
 zle -N fzf-fm
 bindkey '\eo' fzf-fm
+
+bindkey -s '\ei' 'fzf-ranger\n'
+
 bindkey -s '^z' 'bg\n'
+
+bindkey -s '\er' 'ranger\n'
 
 zle-line-init ()
 {
@@ -187,3 +210,5 @@ zle-line-init ()
 }
 #zle -N zle-line-init
 #zle -N zle-keymap-select auto-fu-zle-keymap-select
+
+bindkey '^[' vi-cmd-mode
