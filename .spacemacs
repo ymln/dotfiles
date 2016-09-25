@@ -257,7 +257,7 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  (add-hook 'prog-mode-hook dtrt-indent-mode)
+  (add-hook 'prog-mode-hook 'dtrt-indent-mode)
   (global-company-mode)
   (define-key evil-normal-state-map (kbd "<backspace>") 'helm-projectile-find-file)
   (define-key evil-normal-state-map (kbd "M-i") 'helm-imenu)
