@@ -48,6 +48,7 @@
 !.mpd/playlists/.gitkeep
 !.ncmpcpp
 !.ncmpcpp/bindings
+!.spacemacs
 !.tmux.conf
 !.vim
 !.vim/
