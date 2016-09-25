@@ -246,6 +246,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   )
 
+(defun copy-buffer-file-name ()
+  (interactive)
+  (kill-new (buffer-file-name)))
+
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
@@ -254,6 +258,24 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (add-hook 'prog-mode-hook dtrt-indent-mode)
+  (global-company-mode)
+  (define-key evil-normal-state-map (kbd "<backspace>") 'helm-projectile-find-file)
+  (define-key evil-normal-state-map (kbd "M-i") 'helm-imenu)
+  (evil-global-set-key 'normal "gr" 'spacemacs/helm-project-smart-do-search)
+  (evil-global-set-key 'normal "gs" 'magit-status)
+  (evil-global-set-key 'normal "gm" 'helm-recentf)
+  (evil-global-set-key 'normal "gc" 'evil-window-delete)
+  (evil-global-set-key 'normal "g1" 'spacemacs/toggle-maximize-buffer)
+  (global-set-key (kbd "M-j") 'evil-window-down)
+  (global-set-key (kbd "M-k") 'evil-window-up)
+  (global-set-key (kbd "M-h") 'evil-window-left)
+  (global-set-key (kbd "M-l") 'evil-window-right)
+  (global-set-key (kbd "M-C") 'copy-buffer-file-name)
+  (add-hook 'c-mode-hook (lambda ()
+                           (define-key c-mode-map (kbd "M-j") nil)))
+  (add-hook 'company-mode-hook (lambda ()
+                                 (global-set-key (kbd "M-/") 'company-complete)
+                                 (define-key company-active-map (kbd "M-/") 'company-select-next)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -265,7 +287,12 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (dtrt-indent xterm-color shell-pop multi-term eshell-prompt-extras esh-help flycheck-pos-tip flycheck helm-gtags ggtags mmm-mode markdown-toc markdown-mode gh-md toc-org org-repo-todo org-present org-pomodoro alert log4e gntp org-plus-contrib org-bullets htmlize gnuplot smeargle phpunit f phpcbf php-extras php-auto-yasnippets orgit magit-gitflow helm-gitignore request helm-company helm-c-yasnippet gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter evil-magit magit magit-popup git-commit with-editor drupal-mode php-mode diff-hl company-statistics company-quickhelp pos-tip company clj-refactor inflections edn multiple-cursors paredit peg cider-eval-sexp-fu cider queue clojure-mode auto-yasnippet yasnippet ac-ispell auto-complete ws-butler window-numbering volatile-highlights vi-tilde-fringe spaceline s powerline smooth-scrolling restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox hydra spinner page-break-lines open-junk-file neotree move-text macrostep lorem-ipsum linum-relative leuven-theme info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-args evil-anzu anzu eval-sexp-fu highlight elisp-slime-nav define-word clean-aindent-mode buffer-move bracketed-paste auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build use-package which-key bind-key bind-map evil spacemacs-theme))))
+    (ranger dtrt-indent xterm-color shell-pop multi-term eshell-prompt-extras esh-help flycheck-pos-tip flycheck helm-gtags ggtags mmm-mode markdown-toc markdown-mode gh-md toc-org org-repo-todo org-present org-pomodoro alert log4e gntp org-plus-contrib org-bullets htmlize gnuplot smeargle phpunit f phpcbf php-extras php-auto-yasnippets orgit magit-gitflow helm-gitignore request helm-company helm-c-yasnippet gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter evil-magit magit magit-popup git-commit with-editor drupal-mode php-mode diff-hl company-statistics company-quickhelp pos-tip company clj-refactor inflections edn multiple-cursors paredit peg cider-eval-sexp-fu cider queue clojure-mode auto-yasnippet yasnippet ac-ispell auto-complete ws-butler window-numbering volatile-highlights vi-tilde-fringe spaceline s powerline smooth-scrolling restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox hydra spinner page-break-lines open-junk-file neotree move-text macrostep lorem-ipsum linum-relative leuven-theme info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-args evil-anzu anzu eval-sexp-fu highlight elisp-slime-nav define-word clean-aindent-mode buffer-move bracketed-paste auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build use-package which-key bind-key bind-map evil spacemacs-theme)))
+ '(paradox-github-token t)
+ '(scroll-conservatively 100000)
+ '(scroll-step 1)
+ '(show-trailing-whitespace t)
+ '(smooth-scroll-margin 0))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
