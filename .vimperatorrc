@@ -24,6 +24,8 @@ source! /home/my/.vimperatorrc.local
 
 nmap v :execute "!play '" + content.location.href + "' &"<Return><Esc>
 
+set complete=l
+
 " https://github.com/vimperator/vimperator-labs/issues/590
 js services.services.autoCompleteSearch.class_="@mozilla.org/autocomplete/search;1?name=unifiedcomplete"
 
