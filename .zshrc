@@ -200,7 +200,7 @@ bindkey '\eo' fzf-fm
 
 bindkey -s '\ei' 'fzf-ranger\n'
 
-bindkey -s '^z' 'bg\n'
+bindkey -s '^z' 'bg; disown\n'
 
 bindkey -s '\er' 'ranger\n'
 
