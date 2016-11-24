@@ -189,21 +189,19 @@ fzf-open() {
 fzf-fm() {
   ls -A | fzf-open
 }
-fzf-ranger() {
+fzf-open() {
   f=`find ~/annex/* ~/,/* ~/.cache/songs/* 2> /dev/null | uniq | fzf`
   if [ -z $f ]; then
     # nothing
-  elif [ -d $f ]; then
-    ranger "$f"
   else
-    ranger --selectfile="$f"
+    open $f
   fi
 }
 
 zle -N fzf-fm
 bindkey '\eo' fzf-fm
 
-bindkey -s '\ei' 'fzf-ranger\n'
+bindkey -s '\ei' 'fzf-open\n'
 
 bindkey -s '^z' 'bg; disown\n'
 
