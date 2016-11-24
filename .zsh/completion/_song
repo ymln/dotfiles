@@ -1,0 +1,5 @@
+#compdef song
+
+pushd ~/.cache/songs &> /dev/null
+_files
+popd &> /dev/null

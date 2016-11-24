@@ -119,6 +119,11 @@ zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p
 zstyle ':completion:*' squeeze-slashes true
 zstyle :compinstall filename '/home/my/.zshrc'
 
+# See https://coderwall.com/p/9fksra/speed-up-your-zsh-completions
+zstyle ':completion:*' accept-exact '*(N)'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit
 compinit
 

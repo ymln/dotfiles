@@ -67,3 +67,8 @@
 !.Xresources
 !.zlogin
 !.zshrc
+!.zsh
+!.zsh/cache
+!.zsh/cache/.gitkeep
+!.zsh/completion
+!.zsh/completion/_song
