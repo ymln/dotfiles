@@ -1,12 +1,14 @@
 #!/bin/zsh
 if [ -d $1 ]; then
   ranger $1
-elif [[  $1 == magnet:*  ]]; then
+elif [[ $1 == magnet:*  ]]; then
   addmagnet $1
 elif [[ $1 == http*:// ]]; then
   mpv $1
 elif [ -L $1 -a ! -e $1 ]; then
   git annex get $1 && open $1
+elif [[ $1 == */.cache/songs/* ]]; then
+  mpv $1
 else
   rifle -f F $1
 fi
