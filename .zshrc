@@ -190,7 +190,7 @@ fzf-fm() {
   ls -A | fzf-open
 }
 fzf-open() {
-  f=`find ~/annex/* ~/,/* ~/.cache/songs/* 2> /dev/null | uniq | fzf`
+  f=`find ~/annex/* ~/,/* ~/.cache/songs/* ~/queue/* 2> /dev/null | uniq | fzf`
   if [ -z $f ]; then
     # nothing
   else
