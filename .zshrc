@@ -70,10 +70,7 @@ alias sl=ls
 alias m="fasd -e mpv"
 alias ytdl=youtube-dl
 alias ,='cd ~/,'
-
-function e {
-  $EDITOR $@ &> /dev/null &!
-}
+alias e=$EDITOR
 
 function libre {
   libreoffice --nologo $@ &!
