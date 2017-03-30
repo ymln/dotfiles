@@ -68,10 +68,7 @@ alias ls="ls --group-directories-first --color=auto"
 alias sl=ls
 alias ytdl=youtube-dl
 alias ,='cd ~/,'
-
-function e {
-  $EDITOR $@ &> /dev/null &!
-}
+alias e=$EDITOR
 
 function libre {
   libreoffice --nologo $@ &!
