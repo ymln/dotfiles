@@ -6,9 +6,11 @@ elif [[ $1 == magnet:* ]]; then
 elif [[ $1 == http*://* ]]; then
   mpv $1
 elif [ -L $1 -a ! -e $1 ]; then
+  pushd "$(dirname "$1")"
   git annex get $1 && open $1
+  popd
 elif [[ $1 == */.cache/songs/* ]]; then
   mpv $1
 else
-  rifle -f F $1
+  rifle $1
 fi

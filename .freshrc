@@ -8,13 +8,5 @@
 #
 # See http://freshshell.com/readme for documentation.
 
-make-ucg() {
-    libtoolize && aclocal && autoheader && autoconf && automake --add-missing && ./configure && make
-}
 fresh freshshell/fresh bin/fresh --bin
-#fresh freshshell/fresh bin/fresh --bin --ref=e9b3215f2ac16873c69e09ec8fe8c9ea066c3d65
-fresh Vifon/deer deer
-fresh clvv/fasd fasd --bin
 fresh jomo/imgur-screenshot imgur-screenshot.sh --bin
-#fresh gvansickle/ucg ucg --bin --pre=make-ucg
-#fresh hchbaw/auto-fu.zsh auto-fu.zsh --ref=42dbef5da89360f132cce010004d4c674a13c951

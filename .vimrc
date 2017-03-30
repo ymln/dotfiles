@@ -46,7 +46,6 @@ Plug 'Shougo/vimproc.vim'
 Plug 'chrisbra/NrrwRgn'
 Plug 'TVO--The-Vim-Outliner'
 Plug 'thinca/vim-qfreplace'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'

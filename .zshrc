@@ -50,7 +50,6 @@ alias task='nocorrect task'
 alias rr='ranger'
 alias gg='git grep'
 alias gst=scmpuff_status
-alias f='fasd -f'
 alias v='f -e vim'
 alias -g G='| grep'
 alias -g GI='| grep -i'
@@ -67,7 +66,6 @@ alias gp="git push && git push --tags"
 alias gd="git describe --tags"
 alias ls="ls --group-directories-first --color=auto"
 alias sl=ls
-alias m="fasd -e mpv"
 alias ytdl=youtube-dl
 alias ,='cd ~/,'
 
@@ -138,16 +136,11 @@ select-word-style bash
 # Shift-tab
 bindkey '^[[Z' reverse-menu-complete
 
-zle -N deer-launch
-bindkey '\ek' deer-launch
-
 if [ -f ~/local.sh ]; then
    . ~/local.sh
 fi
 
 source ~/.fresh/build/shell.sh
-
-eval "$(fasd --init auto)"
 
 eval "$(scmpuff init -s)"
 
@@ -159,38 +152,37 @@ escape() {
 fzf-process() {
   read key
   read f
-  export f
   case $key in
     alt-h)
       cd ..
       fzf-fm
-      ;;
-    /)
-      find . | fzf-open
-      ;;
-    alt-m)
-      mpv $f
       ;;
     enter)
       if [ -d $f ]; then
         cd $f
         fzf-fm
       else
+        while [ -n "$f" ]; do
+          escaped="$escaped $(escape "$f")"
+          read f
+        done
         zle reset-prompt
-        ef=`escape $f`
-        zle -U ' '$ef
+        zle -U $escaped
+        unset escaped
       fi
       ;;
   esac
+  unset f
+  unset key
 }
 fzf-exec() {
-  fzf --expect alt-h,/,alt-m,enter | fzf-process
+  fzf --multi --expect alt-h,enter | fzf-process
 }
 fzf-fm() {
-  ls -A | fzf-exec
+  find . 2> /dev/null | fzf-exec
 }
 fzf-open() {
-  f=`find ~/annex/* ~/,/* ~/.cache/songs/* 2> /dev/null | uniq | fzf`
+  f=`find ~/annex/* ~/,/* ~/queue 2> /dev/null | uniq | fzf`
   if [ -z $f ]; then
     # nothing
   else
