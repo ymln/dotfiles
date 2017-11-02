@@ -1,6 +1,6 @@
 urxvt*background: #111111
 urxvt*foreground: #eeeeee
-URxvt.font: xft:Monospace:pixelsize=15
+URxvt.font: xft:Deja Vu Sans Mono:pixelsize=15
 URxvt.perl-ext-common:  default
 URxvt.tabbed.tabbar-fg: 2
 URxvt.tabbed.tabbar-bg: 0
