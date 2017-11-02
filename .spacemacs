@@ -234,7 +234,7 @@ values."
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
    ;; (default '("ag" "pt" "ack" "grep"))
-   dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
+   dotspacemacs-search-tools '("ag" "pt" "ack" "grep")
    ;; The default package repository used if no explicit repository has been
    ;; specified with an installed package.
    ;; Not used for now. (default nil)
@@ -281,7 +281,7 @@ you should place your code here."
   (global-company-mode)
   (define-key evil-normal-state-map (kbd "<backspace>") 'counsel-projectile)
   (define-key evil-normal-state-map (kbd "M-i") 'counsel-imenu)
-  (evil-global-set-key 'normal "gr" 'counsel-git-grep)
+  (evil-global-set-key 'normal "gr" 'counsel-ag)
   (evil-global-set-key 'normal "gs" 'magit-status)
   (evil-global-set-key 'normal "gm" 'counsel-recentf)
   (evil-global-set-key 'normal "gc" 'evil-window-delete)
