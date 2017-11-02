@@ -45,7 +45,6 @@ export FZF_DEFAULT_OPTS='--extended --cycle'
 alias g=git
 alias _=sudo
 alias v=vim-wrapper
-alias vd=vimdiff
 alias task='nocorrect task'
 alias rr='ranger'
 alias gg='git grep'
