@@ -266,6 +266,11 @@ before packages are loaded. If you are unsure, you should try in setting them in
          (file (substring file-with-nl 0 -1)))
     (start-process "rifle" nil "rifle" file)))
 
+(defun counsel-ag-in-project ()
+  (interactive)
+  (counsel-ag "" (and (projectile-project-p)
+                      (projectile-project-root))))
+
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
@@ -281,12 +286,13 @@ you should place your code here."
   (global-company-mode)
   (define-key evil-normal-state-map (kbd "<backspace>") 'counsel-projectile)
   (define-key evil-normal-state-map (kbd "M-i") 'counsel-imenu)
-  (evil-global-set-key 'normal "gr" 'counsel-ag)
+  (evil-global-set-key 'normal "gr" 'counsel-ag-in-project)
   (evil-global-set-key 'normal "gs" 'magit-status)
   (evil-global-set-key 'normal "gm" 'counsel-recentf)
   (evil-global-set-key 'normal "gc" 'evil-window-delete)
   (evil-global-set-key 'normal "g1" 'spacemacs/toggle-maximize-buffer)
   (evil-global-set-key 'normal (kbd "SPC SPC") 'counsel-projectile)
+  (evil-global-set-key 'normal (kbd "SPC ,") 'counsel-projectile)
   (global-set-key (kbd "M-j") 'evil-window-down)
   (global-set-key (kbd "M-k") 'evil-window-up)
   (global-set-key (kbd "M-h") 'evil-window-left)
