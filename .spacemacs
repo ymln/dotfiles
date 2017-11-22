@@ -54,7 +54,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(dtrt-indent slamhound)
+   dotspacemacs-additional-packages '(dtrt-indent)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -291,6 +291,7 @@ you should place your code here."
   (evil-global-set-key 'normal "gm" 'counsel-recentf)
   (evil-global-set-key 'normal "gc" 'evil-window-delete)
   (evil-global-set-key 'normal "g1" 'spacemacs/toggle-maximize-buffer)
+  (evil-global-set-key 'normal "gd" 'dumb-jump-go)
   (evil-global-set-key 'normal (kbd "SPC SPC") 'counsel-projectile)
   (evil-global-set-key 'normal (kbd "SPC ,") 'counsel-projectile)
   (global-set-key (kbd "M-j") 'evil-window-down)
