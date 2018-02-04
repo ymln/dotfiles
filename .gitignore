@@ -36,9 +36,9 @@
 !.config
 !.config/dunst
 !.config/dunst/dunstrc
-!.config/nvim
 !.config/i3
 !.config/i3/config
+!.config/nvim
 !.emacs
 !.freshrc
 !.gitignore
@@ -66,11 +66,13 @@
 !.vimrc
 !.vim/swap
 !.vim/swap/.gitkeep
+!.xinitrc
+!.Xmodmap
 !.Xresources
 !.zlogin
-!.zshrc
 !.zsh
 !.zsh/cache
 !.zsh/cache/.gitkeep
 !.zsh/completion
 !.zsh/completion/_song
+!.zshrc
