@@ -37,6 +37,8 @@
 !.config/dunst
 !.config/dunst/dunstrc
 !.config/nvim
+!.config/i3
+!.config/i3/config
 !.emacs
 !.freshrc
 !.gitignore
