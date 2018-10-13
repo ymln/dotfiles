@@ -41,6 +41,7 @@ export LS_COLORS='rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;
 export LESS='-F -g -i -M -R -S -w -X -z-4'
 export PATH=~/bin:~/.linuxbrew/bin:$PATH
 export FZF_DEFAULT_OPTS='--extended --cycle'
+export PAGER=less
 
 alias g=git
 alias _=sudo
@@ -182,6 +183,7 @@ fzf-open() {
   if [ -z $f ]; then
     # nothing
   else
+    print -rs open `printf %q $f`
     open $f
   fi
 }
@@ -201,5 +203,13 @@ zle-line-init ()
 }
 #zle -N zle-line-init
 #zle -N zle-keymap-select auto-fu-zle-keymap-select
+
+ranger() {
+    if [ -z "$RANGER_LEVEL" ]; then
+        /usr/bin/ranger "$@"
+    else
+        exit
+    fi
+}
 
 bindkey '^[' vi-cmd-mode

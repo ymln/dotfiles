@@ -4,13 +4,29 @@ if [ -d $1 ]; then
 elif [[ $1 == magnet:* ]]; then
   addmagnet $1
 elif [[ $1 == http*://* ]]; then
-  mpv $1
+  if [[ $1 == https://rarbg2018.org/torrent/* ]]; then
+    open `rarbg-magnet $1`
+  #elif streamlink --can-handle-url $1; then
+    #streamlink $1 best
+  else
+    mpv $1
+  fi
 elif [ -L $1 -a ! -e $1 ]; then
   pushd "$(dirname "$1")"
-  git annex get $1 && open $1
+  stream $1
   popd
 elif [[ $1 == */.cache/songs/* ]]; then
   mpv $1
+elif [[ $1 == *.cue ]]; then
+  mpv $1
+elif [[ $1 == *.smc ]]; then
+  snes9x-gtk $1
+elif [[ $1 == *.?64 ]]; then
+  mupen $1
+elif [[ $1 == */nes/*.zip ]]; then
+  fceux $1
+elif [[ $1 == */genesis/*.bin ]]; then
+  dgen $1
 else
-  rifle $1
+  rifle -f F $1
 fi
