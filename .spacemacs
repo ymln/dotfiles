@@ -358,7 +358,7 @@ you should place your code here."
   (flycheck-add-mode 'typescript-tslint 'web-mode)
   (flycheck-add-mode 'typescript-tslint 'typescript-mode)
   (global-company-mode)
-  (define-key evil-normal-state-map (kbd "<backspace>") 'counsel-projectile)
+  (define-key evil-normal-state-map (kbd "<backspace>") 'projectile-find-file)
   (define-key evil-normal-state-map (kbd "M-i") 'counsel-imenu)
   (evil-global-set-key 'normal "gr" 'counsel-ag-in-project)
   (evil-global-set-key 'normal "gs" 'magit-status)
@@ -366,8 +366,9 @@ you should place your code here."
   (evil-global-set-key 'normal "gc" 'evil-window-delete)
   (evil-global-set-key 'normal "g1" 'spacemacs/toggle-maximize-buffer)
   (evil-global-set-key 'normal "gd" 'dumb-jump-go)
-  (evil-global-set-key 'normal (kbd "SPC SPC") 'counsel-projectile)
-  (evil-global-set-key 'normal (kbd "SPC ,") 'counsel-projectile)
+  (evil-global-set-key 'normal (kbd "SPC SPC") 'projectile-find-file)
+  (evil-global-set-key 'normal (kbd "SPC ,") 'projectile-find-file)
+  (evil-global-set-key 'normal (kbd "SPC p p") 'projectile-switch-project)
   (global-set-key (kbd "M-j") 'evil-window-down)
   (global-set-key (kbd "M-k") 'evil-window-up)
   (global-set-key (kbd "M-h") 'evil-window-left)
@@ -376,6 +377,7 @@ you should place your code here."
   (add-hook 'company-mode-hook (lambda ()
                                  (global-set-key (kbd "M-/") 'company-complete)
                                  (define-key company-active-map (kbd "M-/") 'company-select-next)))
+  (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
   (global-set-key (kbd "<f1>") 'open-file-at-line))
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -390,7 +392,7 @@ you should place your code here."
  '(ansi-color-names-vector
    ["#272822" "#F92672" "#A6E22E" "#E6DB74" "#66D9EF" "#FD5FF0" "#A1EFE4" "#F8F8F2"])
  '(cider-cljs-lein-repl
-   "(do (feed-reader.server/enable-schema-validation!) (feed-reader.server/db-connect \"//localhost/feed_reader\") (feed-reader.server/start-figwheel))")
+   "(do (feed-reader.server/enable-schema-validation!) (feed-reader.server/db-connect \"//localhost:5433/feed_reader\") (feed-reader.server/start-figwheel))")
  '(compilation-message-face (quote default))
  '(cua-global-mark-cursor-color "#2aa198")
  '(cua-normal-cursor-color "#839496")
@@ -431,7 +433,8 @@ you should place your code here."
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
  '(package-selected-packages
    (quote
-    (tide typescript-mode prettier-js ghub let-alist org-mime org-category-capture goto-chg undo-tree wgrep smex ivy-hydra counsel-projectile counsel swiper ivy diminish shut-up winum unfill fuzzy company-ansible jinja2-mode ansible-doc ansible yaml-mode vimrc-mode dactyl-mode seq org pcache slamhound yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic hide-comnt csv-mode sql-indent uuidgen pug-mode org-projectile org-download mwim livid-mode skewer-mode simple-httpd link-hint git-link eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff eshell-z dumb-jump column-enforce-mode clojure-snippets evil-cleverparens omnisharp csharp-mode web-mode web-beautify tagedit slim-mode scss-mode sass-mode less-css-mode json-mode json-snatcher json-reformat js2-refactor js2-mode js-doc jade-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data company-tern dash-functional tern coffee-mode zenburn-theme monokai-theme solarized-theme ranger dtrt-indent xterm-color shell-pop multi-term eshell-prompt-extras esh-help flycheck-pos-tip flycheck helm-gtags ggtags mmm-mode markdown-toc markdown-mode gh-md toc-org org-repo-todo org-present org-pomodoro alert log4e gntp org-plus-contrib org-bullets htmlize gnuplot smeargle phpunit f phpcbf php-extras php-auto-yasnippets orgit magit-gitflow helm-gitignore request helm-company helm-c-yasnippet gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter evil-magit magit magit-popup git-commit with-editor drupal-mode php-mode diff-hl company-statistics company-quickhelp pos-tip company clj-refactor inflections edn multiple-cursors paredit peg cider-eval-sexp-fu cider queue clojure-mode auto-yasnippet yasnippet ac-ispell auto-complete ws-butler window-numbering volatile-highlights vi-tilde-fringe spaceline s powerline smooth-scrolling restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox hydra spinner page-break-lines open-junk-file neotree move-text macrostep lorem-ipsum linum-relative leuven-theme info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-args evil-anzu anzu eval-sexp-fu highlight elisp-slime-nav define-word clean-aindent-mode buffer-move bracketed-paste auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build use-package which-key bind-key bind-map evil spacemacs-theme)))
+(ace-jump-helm-line ace-link ace-window ac-ispell adaptive-wrap aggressive-indent alert anaconda-mode ansible ansible-doc anzu async auto-compile auto-complete auto-highlight-symbol auto-yasnippet avy bind-key bind-map bracketed-paste buffer-move cider cider-eval-sexp-fu clean-aindent-mode clj-refactor clojure-mode clojure-snippets coffee-mode column-enforce-mode company company-anaconda company-ansible company-quickhelp company-statistics company-tern company-web counsel counsel-projectile csharp-mode csv-mode cython-mode dactyl-mode dash dash-functional define-word diff-hl diminish drupal-mode dtrt-indent dumb-jump edn elisp-slime-nav emmet-mode epl eshell-prompt-extras eshell-z esh-help eval-sexp-fu evil evil-anzu evil-args evil-cleverparens evil-ediff evil-escape evil-exchange evil-iedit-state evil-indent-plus evil-lisp-state evil-magit evil-matchit evil-mc evil-nerd-commenter evil-numbers evil-search-highlight-persist evil-surround evil-tutor evil-unimpaired evil-visual-mark-mode evil-visualstar exec-path-from-shell expand-region eyebrowse f fancy-battery fill-column-indicator flx flx-ido flycheck flycheck-pos-tip fringe-helper fuzzy ggtags gh-md ghub gitattributes-mode git-commit gitconfig-mode git-gutter git-gutter+ git-gutter-fringe git-gutter-fringe+ gitignore-mode git-link git-messenger git-timemachine gntp gnuplot golden-ratio google-translate goto-chg graphql haml-mode helm helm-ag helm-company helm-core helm-css-scss helm-c-yasnippet helm-descbinds helm-flx helm-gitignore helm-gtags helm-make helm-mode-manager helm-projectile helm-pydoc helm-swoop helm-themes help-fns+ hide-comnt highlight highlight-indentation highlight-numbers highlight-parentheses hl-todo htmlize hungry-delete hydra hy-mode ido-vertical-mode iedit indent-guide inflections info+ ivy ivy-hydra jade-mode jinja2-mode js2-mode js2-refactor js-doc json-mode json-reformat json-snatcher less-css-mode let-alist leuven-theme link-hint linum-relative live-py-mode livid-mode log4e lorem-ipsum macrostep magit magit-gitflow magit-popup markdown-mode markdown-toc mmm-mode monokai-theme move-text multiple-cursors multi-term mwim neotree omnisharp open-junk-file org org-bullets org-category-capture org-download orgit org-mime org-plus-contrib org-pomodoro org-present org-projectile org-repo-todo package-build packed page-break-lines paradox paredit parent-mode pcache pcre2el peg persp-mode php-auto-yasnippets phpcbf php-extras php-mode phpunit pip-requirements pkg-info popup popwin pos-tip powerline prettier-js projectile pug-mode pyenv-mode py-isort pytest pythonic pyvenv quelpa queue rainbow-delimiters ranger request restart-emacs s sass-mode scss-mode seq sesman shell-pop shut-up simple-httpd skewer-mode slamhound slim-mode smartparens smeargle smex smooth-scrolling solarized-theme spaceline spacemacs-theme spinner sql-indent swiper tagedit tern tide toc-org treepy typescript-mode undo-tree unfill use-package uuidgen vimrc-mode vi-tilde-fringe volatile-highlights web-beautify web-completion-data web-mode wgrep which-key window-numbering winum with-editor ws-butler xterm-color yaml-mode yapfify yasnippet zenburn-theme)
+))
  '(paradox-github-token t)
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
