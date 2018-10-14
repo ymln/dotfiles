@@ -126,7 +126,8 @@
  "SPC b" 'ivy-switch-buffer
  "SPC r" 'counsel-recentf
  "M-i" 'counsel-imenu
- "gr" 'counsel-ag-in-project)
+ "gr" 'counsel-ag-in-project
+ "SPC w" 'evil-window-map)
 
 (general-define-key
  :keymaps 'ivy-minibuffer-map
