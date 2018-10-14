@@ -164,6 +164,7 @@
  '(global-auto-revert-mode t)
  '(global-company-mode t)
  '(global-flycheck-mode t)
+ '(global-hl-line-mode t)
  '(magit-display-buffer-function (quote magit-display-buffer-fullframe-status-v1))
  '(menu-bar-mode nil)
  '(package-selected-packages
