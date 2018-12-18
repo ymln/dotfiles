@@ -118,6 +118,9 @@
 
 (use-package wgrep)
 
+(use-package evil-surround
+  :after evil)
+
 (defun copy-buffer-file-name ()
   (interactive)
   (kill-new (buffer-file-name)))
@@ -139,7 +142,8 @@
  "SPC r" 'counsel-recentf
  "M-i" 'counsel-imenu
  "gr" 'counsel-ag-in-project
- "SPC w" 'evil-window-map)
+ "SPC w" 'evil-window-map
+ "M-z" 'swiper)
 
 (general-define-key
  :keymaps 'ivy-minibuffer-map
@@ -178,6 +182,7 @@
  '(evil-mode t)
  '(global-auto-revert-mode t)
  '(global-company-mode t)
+ '(global-evil-surround-mode t)
  '(global-flycheck-mode t)
  '(global-hl-line-mode t)
  '(ivy-mode t)
@@ -185,13 +190,14 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (wgrep spacemacs-theme ws-butler smart-jump evil-magit magit company dtrt-indent tide web-mode flycheck prettier-js json-mode js2-mode php-mode evil-cleverparens paredit counsel ivy-hydra ivy evil better-defaults general use-package)))
+    (evil-surround wgrep spacemacs-theme ws-butler smart-jump evil-magit magit company dtrt-indent tide web-mode flycheck prettier-js json-mode js2-mode php-mode evil-cleverparens paredit counsel ivy-hydra ivy evil better-defaults general use-package)))
  '(projectile-completion-system (quote ivy))
  '(projectile-enable-caching t)
  '(projectile-mode t nil (projectile))
  '(save-place-mode t)
  '(scroll-conservatively 100000)
  '(scroll-step 1)
+ '(select-enable-primary t)
  '(show-paren-mode t)
  '(show-trailing-whitespace t)
  '(tool-bar-mode nil)
