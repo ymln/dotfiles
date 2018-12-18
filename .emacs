@@ -14,6 +14,8 @@
 
 (use-package evil)
 
+(use-package diminish)
+
 (use-package projectile
   :general
   (:states 'normal "SPC p" 'projectile-command-map))
@@ -24,12 +26,14 @@
                       (projectile-project-root))))
 
 (use-package ivy
+  :diminish ivy-mode
   :after projectile)
 
 (use-package ivy-hydra
   :after ivy)
 
 (use-package counsel
+  :diminish counsel-mode
   :after ivy)
 
 (use-package counsel-projectile
@@ -69,24 +73,31 @@
 
 (use-package flycheck)
 
-(use-package web-mode
-  :mode ("\\.tsx?\\'" . web-mode))
-
-(use-package tide
-  :after (flycheck web-mode)
-  :mode ("\\.tsx?\\'" . tide-mode)
-  :init
-  (add-hook 'tide-mode-hook (lambda ()
-                              (add-hook 'before-save-hook 'tide-format-before-save nil t)))
-  (flycheck-add-mode 'typescript-tslint 'web-mode)
-  (flycheck-add-mode 'typescript-tslint 'typescript-mode))
-
-(use-package dtrt-indent)
-
 (use-package company
+  :diminish company-mode
   :general
   ("M-/" 'company-complete)
   (:keymaps 'company-active-map "M-/" 'company-select-next))
+
+(use-package web-mode
+  :mode ("\\.tsx\\'" . web-mode)
+  :hook (web-mode . (lambda ()
+                      (when (string-equal "tsx" (file-name-extension buffer-file-name))
+                        (tide-setup)))))
+
+(use-package typescript-mode
+  :hook (typescript-mode . tide-setup))
+
+(use-package tide
+  :commands (tide-setup tide-format-before-save)
+  :after (typescript-mode company flycheck web-mode)
+  :init
+  (add-hook 'before-save-hook #'tide-format-before-save)
+  (flycheck-add-mode 'typescript-tslint 'web-mode)
+  (flycheck-add-mode 'typescript-tslint 'typescript-mode))
+
+(use-package dtrt-indent
+  :diminish dtrt-indent-mode)
 
 (use-package magit
   :general
@@ -99,7 +110,8 @@
   :config
   (smart-jump-setup-default-registers))
 
-(use-package ws-butler)
+(use-package ws-butler
+  :diminish ws-butler-mode)
 
 (use-package spacemacs-theme
   :no-require t)
@@ -154,6 +166,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(before-save-hook (quote (tide-format-before-save)))
+ '(blink-cursor-mode nil)
  '(counsel-mode t)
  '(custom-enabled-themes (quote (spacemacs-dark)))
  '(custom-safe-themes
