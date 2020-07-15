@@ -213,5 +213,3 @@ ranger() {
         exit
     fi
 }
-
-bindkey '^[' vi-cmd-mode
