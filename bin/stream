@@ -1,0 +1,51 @@
+#!/bin/sh
+annex_pid=
+open_pid=
+
+log()
+{
+  if [ $LOG ]; then
+    echo $@
+  fi
+}
+
+kill_children()
+{
+  if [ $annex_pid ]; then
+    kill $annex_pid
+  fi
+  if [ $open_pid ]; then
+    kill $open_pid
+  fi
+  exit
+}
+
+trap kill_children 2
+
+if [ -z `readlink -f "$1"` ]; then
+  git annex get "$1" &
+  annex_pid=$!
+  log annex_pid: $annex_pid
+fi
+while true; do
+  if [ "`git annex inprogress "$1"`" ]; then
+    open "`git annex inprogress "$1"`" &
+    open_pid=$!
+    log open_pid: $open_pid
+    break
+  elif [ "`readlink -f "$1"`" ]; then
+    open "$1" &
+    open_pid=$!
+    log open_pid: $open_pid
+    break
+  else
+    sleep 1
+  fi
+done
+
+if [ $open_pid ]; then
+  wait $open_pid
+fi
+if [ $annex_pid ]; then
+  kill $annex_pid
+fi

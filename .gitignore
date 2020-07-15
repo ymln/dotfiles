@@ -26,6 +26,7 @@
 !bin/scrot-clip
 !bin/song
 !bin/stash
+!bin/stream
 !bin/term
 !bin/toaudio
 !bin/todo
