@@ -137,8 +137,6 @@ if [ -f ~/local.sh ]; then
    . ~/local.sh
 fi
 
-source ~/.fresh/build/shell.sh
-
 eval "$(scmpuff init -s)"
 
 escape() {
