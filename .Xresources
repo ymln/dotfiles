@@ -11,3 +11,11 @@ URxvt.color12 : #77f
 URxvt.color14 : #859900
 URxvt*urgentOnBell: true
 URxvt*saveLines: 1000000
+
+UXTerm.vt100.background: black
+UXTerm.vt100.foreground: lightgray
+UXTerm.vt100.faceName: monospace:pixelsize=16
+UXTerm.vt100.metaSendsEscape: true
+UXTerm.vt100.saveLines: 100000
+UXTerm.vt100.bellIsUrgent: true
+UXTerm.termName: xterm-256color
