@@ -25,7 +25,7 @@ chpwd() {
 }
 zstyle ':vcs_info:*' formats \
   '%F{yellow}( %b )'
-PROMPT='%F{green}%n%F{yellow}@%F{green}%m${vcs_info_msg_0_}%(1v.(bg: %v%).) %F{green}%3~ %F{yellow}» %F{reset}'
+PROMPT='%F{green}%n%F{yellow}@%F{green}%m${vcs_info_msg_0_}%(1v.(bg: %v%).) %F{green}%3~ %F{yellow}» %F{white}%F{reset}'
 RPROMPT='[%*]'
 
 export ALTERNATE_EDITOR=''
@@ -196,6 +196,8 @@ bindkey -s '\ei' 'fzf-open\n'
 bindkey -s '^z' 'bg; disown\n'
 
 bindkey -s '\er' 'ranger\n'
+
+bindkey -s '\em' 'ps aux | fzf\n'
 
 zle-line-init ()
 {
