@@ -11,6 +11,7 @@
 !bin/forever
 !bin/fzf
 !bin/fzf-tmux
+!bin/git-annex-remote-b2
 !bin/img2clip
 !bin/l
 !bin/lsq
