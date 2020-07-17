@@ -105,6 +105,17 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
+workspace 1 output eDP1
+workspace 2 output HDMI1
+workspace 3 output HDMI1
+workspace 4 output HDMI1
+workspace 5 output HDMI1
+workspace 6 output HDMI1
+workspace 7 output HDMI1
+workspace 8 output HDMI1
+workspace 9 output HDMI1
+workspace 10 output HDMI1
+
 # reload the configuration file
 bindsym $mod+Shift+R reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -190,7 +201,8 @@ workspace_layout tabbed
 
 #bindsym $mod+g exec dmenu_focus
 
-bindsym $mod+w exec myurxvtc -e wicd-curses
+#bindsym $mod+w exec myurxvtc -e wicd-curses
+bindsym $mod+w exec iwctl station wlan0 scan
 bindsym $mod+t exec myurxvtc -e glances
 
 bindsym $mod+Shift+P exec play `xsel -o`
