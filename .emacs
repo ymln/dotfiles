@@ -20,9 +20,9 @@
   :general
   (:states 'normal "SPC p" 'projectile-command-map))
 
-(defun counsel-ag-in-project ()
+(defun counsel-rg-in-project ()
   (interactive)
-  (counsel-ag "" (and (projectile-project-p)
+  (counsel-rg "" (and (projectile-project-p)
                       (projectile-project-root))))
 
 (use-package ivy
@@ -141,7 +141,7 @@
  "SPC b" 'ivy-switch-buffer
  "SPC r" 'counsel-recentf
  "M-i" 'counsel-imenu
- "gr" 'counsel-ag-in-project
+ "gr" 'counsel-rg-in-project
  "SPC w" 'evil-window-map
  "M-z" 'swiper)
 
@@ -186,6 +186,7 @@
  '(global-flycheck-mode t)
  '(global-hl-line-mode t)
  '(ivy-mode t)
+ '(magit-diff-refine-hunk (quote all))
  '(magit-display-buffer-function (quote magit-display-buffer-fullframe-status-v1))
  '(menu-bar-mode nil)
  '(package-selected-packages
@@ -201,6 +202,7 @@
  '(show-paren-mode t)
  '(show-trailing-whitespace t)
  '(tool-bar-mode nil)
+ '(tramp-default-method "ssh")
  '(visible-bell nil)
  '(which-function-mode t)
  '(windmove-wrap-around t)
