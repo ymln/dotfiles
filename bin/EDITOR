@@ -1,4 +1,2 @@
 #!/bin/zsh
-. /home/ymelnyk/.nix-profile/etc/profile.d/nix.sh
-TERM=xterm-256color emacsclient -nw $@
-#nvim $@
+TERM=xterm-256color emacsclient -c $@
