@@ -19,7 +19,7 @@ elif [[ $1 == */.cache/songs/* ]]; then
   mpv $1
 elif [[ $1 == *.cue ]]; then
   mpv $1
-elif [[ $1 == *.smc ]]; then
+elif [[ $1 == *.smc || $1 == *.SMC ]]; then
   snes9x-gtk $1
 elif [[ $1 == *.?64 ]]; then
   mupen $1
