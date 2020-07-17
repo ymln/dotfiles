@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python
 import gi
 gi.require_version('Gdk', '3.0')
 gi.require_version('PangoCairo', '1.0')
