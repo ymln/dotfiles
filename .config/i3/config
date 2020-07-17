@@ -170,7 +170,7 @@ for_window [class="Chromium"] border pixel
 
 # Browser
 #for_window [class="luakit"] move scratchpad; scratchpad show
-bindsym $mod+b exec runorraise firefox Firefox
+bindsym $mod+b exec runorraise firefox firefox
 
 for_window [class="CivilizationV.exe"] fullscreen enable
 
