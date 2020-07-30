@@ -45,8 +45,6 @@
 !.zsh/completion/_song
 !.zshrc
 !bin
-!bin/+x
-!bin/EDITOR
 !bin/addmagnet
 !bin/backup
 !bin/bye!
@@ -55,6 +53,7 @@
 !bin/cpsubs
 !bin/dmenu_pass
 !bin/dmenu_umount
+!bin/EDITOR
 !bin/forever
 !bin/fzf
 !bin/fzf-tmux
@@ -82,4 +81,6 @@
 !bin/upto
 !bin/website-wget
 !bin/whiteboard-cleaner
+!bin/+x
+!bin/x
 !install.sh
