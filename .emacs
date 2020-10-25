@@ -101,7 +101,8 @@
 
 (use-package magit
   :general
-  (:states 'normal "gs" 'magit-status))
+  (:states 'normal "gs" 'magit-status)
+  (:states 'normal "gb" 'magit-blame))
 
 (use-package evil-magit
   :after magit)
