@@ -197,6 +197,8 @@ bindkey -s '\er' 'ranger\n'
 
 bindkey -s '\em' 'ps aux | fzf\n'
 
+bindkey -s '\eg' 'gr\n'
+
 zle-line-init ()
 {
   #auto-fu-init

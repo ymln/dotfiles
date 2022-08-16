@@ -1,0 +1,13 @@
+results=$(
+  fzf \
+  --multi \
+  --disabled \
+  --delimiter=: \
+  --bind="change:reload:rg --line-number --smart-case \$(echo {q} | sed 's/ /.*/g')"
+)
+files=()
+if [ -n "$results" ]; then
+  line=$(echo "$results" | sed 's/[^:]*:\([^:]*\):.*/\1/' | head -n1)
+  files=$(echo "$results" | sed 's/:.*//' | sort | uniq)
+  nvim +$line $files
+fi

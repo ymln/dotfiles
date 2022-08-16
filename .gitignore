@@ -59,6 +59,7 @@
 !bin/fzf-tmux
 !bin/git-annex-remote-b2
 !bin/git-ci
+!bin/gr
 !bin/img2clip
 !bin/l
 !bin/lsq
