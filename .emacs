@@ -52,8 +52,9 @@
 		     ielm-mode-hook
 		     lisp-mode-hook
 		     lisp-interaction-mode-hook
-		     ;; clojure-mode-hook
-		     scheme-mode-hook))
+		     clojure-mode-hook
+		     scheme-mode-hook
+                     cider-major-mode-hook))
 
 (use-package paredit
   :commands paredit-mode
@@ -131,6 +132,17 @@
   :after evil
   :config
   (evil-collection-init))
+
+(defun cider-reload-on-save ()
+  "Automatically reload the Clojure file if CIDER is enabled."
+  (add-hook 'after-save-hook
+            '(lambda ()
+               (if (and (boundp 'cider-mode) cider-mode)
+                   (cider-load-buffer)))))
+
+(use-package cider
+  :init
+  (add-hook 'cider-mode-hook #'cider-reload-on-save))
 
 (defun copy-buffer-file-name ()
   (interactive)
