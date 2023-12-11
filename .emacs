@@ -12,7 +12,15 @@
 
 (use-package better-defaults)
 
-(use-package evil)
+(use-package evil
+  :init
+  ; required for evil-collection
+  (setq evil-want-keybinding nil)
+  :config
+  ; can't do this in custom-set-variables, because
+  ; evil-want-keybinding needs to be set before evil-mode is
+  ; initialized
+  (evil-mode 1))
 
 (use-package diminish)
 
@@ -104,9 +112,6 @@
   (:states 'normal "gs" 'magit-status)
   (:states 'normal "gb" 'magit-blame))
 
-(use-package evil-magit
-  :after magit)
-
 (use-package smart-jump
   :config
   (smart-jump-setup-default-registers))
@@ -121,6 +126,11 @@
 
 (use-package evil-surround
   :after evil)
+
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
 
 (defun copy-buffer-file-name ()
   (interactive)
@@ -180,8 +190,7 @@
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
  '(dtrt-indent-global-mode t)
  '(dtrt-indent-mode t nil (dtrt-indent))
- '(evil-mode t)
- '(global-auto-revert-mode t)
+'(global-auto-revert-mode t)
  '(global-company-mode t)
  '(global-evil-surround-mode t)
  '(global-flycheck-mode t)
